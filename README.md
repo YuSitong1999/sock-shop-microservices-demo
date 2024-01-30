@@ -120,3 +120,15 @@ services:
 *
 * https://github.com/YuSitong1999/sock-shop-edge-router
 * https://github.com/YuSitong1999/sock-shop-load-test
+
+## 部署
+
+```Bash
+
+# 部署集群 用官方镜像 开启额外端口
+docker-compose -f .\deploy\docker-compose\docker-compose-debug.yml up -d
+
+# 关闭集群
+docker-compose -f .\deploy\docker-compose\docker-compose-debug.yml down
+
+```
