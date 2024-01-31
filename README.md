@@ -43,45 +43,45 @@ application once it's running in the selected [target platform](./deploy/).
 ```yaml
 services:
   front-end:
-    image: weaveworksdemos/front-end:0.3.12
+    image: weaveworksdemos/front-end:0.3.12 # 最新镜像 0.3.12 最新版本 0.3.12
 
 
   orders:
-    image: weaveworksdemos/orders:0.4.7
+    image: weaveworksdemos/orders:0.4.7 # 最新镜像 0.4.7 最新版本 0.4.7
   orders-db:
     image: mongo:3.4
 
   payment:
-    image: weaveworksdemos/payment:0.4.3
+    image: weaveworksdemos/payment:0.4.3 # 最新镜像 0.4.3 最新版本 0.4.3
 
   user:
-    image: weaveworksdemos/user:0.4.4
+    image: weaveworksdemos/user:0.4.4 # ! 最新镜像 0.4.7 最新版本 0.4.7
   user-db:
-    image: weaveworksdemos/user-db:0.4.0
+    image: weaveworksdemos/user-db:0.4.0 # ! 最新镜像 0.4.7
 
   catalogue:
-    image: weaveworksdemos/catalogue:0.3.5
+    image: weaveworksdemos/catalogue:0.3.5 # 最新镜像 0.3.5 最新版本 0.3.5
   catalogue-db:
-    image: weaveworksdemos/catalogue-db:0.3.0
+    image: weaveworksdemos/catalogue-db:0.3.0 # ! 最新镜像 0.3.5
 
   carts:
-    image: weaveworksdemos/carts:0.4.8
+    image: weaveworksdemos/carts:0.4.8 # 最新镜像 0.4.8 最新版本 0.4.8
   carts-db:
     image: mongo:3.4
 
 
   shipping:
-    image: weaveworksdemos/shipping:0.4.8
+    image: weaveworksdemos/shipping:0.4.8 # 最新镜像 0.4.8 最新版本 0.4.8
   rabbitmq:
     image: rabbitmq:3.6.8
   queue-master:
-    image: weaveworksdemos/queue-master:0.3.1
+    image: weaveworksdemos/queue-master:0.3.1 # 最新镜像 0.3.1 最新版本 0.3.1
 
 
   edge-router:
-    image: weaveworksdemos/edge-router:0.1.1
+    image: weaveworksdemos/edge-router:0.1.1 # 最新镜像 0.1.1 最新版本 0.1.1
   user-sim:
-    image: weaveworksdemos/load-test:0.1.1
+    image: weaveworksdemos/load-test:0.1.1 # 最新镜像 0.1.1 最新版本 0.1.1
 
 ```
 
