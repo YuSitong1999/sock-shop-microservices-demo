@@ -48,6 +48,14 @@ spec:
           volumeMounts:
             - mountPath: /tmp
               name: tmp-volume
+          readinessProbe:
+            httpGet:
+              port: 80
+              path: /health
+            periodSeconds: 3 # 默认 10
+            failureThreshold: 2 # 默认 3
+            successThreshold: 1
+            timeoutSeconds: 1
       volumes:
         - name: tmp-volume
           emptyDir:
@@ -107,6 +115,16 @@ spec:
           volumeMounts:
             - mountPath: /tmp
               name: tmp-volume
+          readinessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - mongo --eval "db.runCommand('ping').ok"
+            periodSeconds: 3 # 默认 10
+            failureThreshold: 2 # 默认 3
+            successThreshold: 1
+            timeoutSeconds: 1
       volumes:
         - name: tmp-volume
           emptyDir:
@@ -180,8 +198,10 @@ spec:
             httpGet:
               path: /health
               port: 80
-            initialDelaySeconds: 180
-            periodSeconds: 3
+            periodSeconds: 3 # 默认 10
+            failureThreshold: 2 # 默认 3
+            successThreshold: 1
+            timeoutSeconds: 1
       nodeSelector:
         kubernetes.io/os: linux
 ---
@@ -230,6 +250,16 @@ spec:
           ports:
             - name: mysql
               containerPort: 3306
+          readinessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - mysqladmin ping -h localhost
+            periodSeconds: 3 # 默认 10
+            failureThreshold: 2 # 默认 3
+            successThreshold: 1
+            timeoutSeconds: 1
       nodeSelector:
         kubernetes.io/os: linux
 ---
@@ -295,8 +325,10 @@ spec:
             httpGet:
               path: /
               port: 8079
-            initialDelaySeconds: 30
-            periodSeconds: 3
+            periodSeconds: 3 # 默认 10
+            failureThreshold: 2 # 默认 3
+            successThreshold: 1
+            timeoutSeconds: 1
       nodeSelector:
         kubernetes.io/os: linux
 ---
@@ -362,6 +394,14 @@ spec:
           volumeMounts:
             - mountPath: /tmp
               name: tmp-volume
+          readinessProbe:
+            httpGet:
+              port: 80
+              path: /health
+            periodSeconds: 3 # 默认 10
+            failureThreshold: 2 # 默认 3
+            successThreshold: 1
+            timeoutSeconds: 1
       volumes:
         - name: tmp-volume
           emptyDir:
@@ -421,6 +461,16 @@ spec:
           volumeMounts:
             - mountPath: /tmp
               name: tmp-volume
+          readinessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - mongo --eval "db.runCommand('ping').ok"
+            periodSeconds: 3 # 默认 10
+            failureThreshold: 2 # 默认 3
+            successThreshold: 1
+            timeoutSeconds: 1
       volumes:
         - name: tmp-volume
           emptyDir:
@@ -491,8 +541,10 @@ spec:
             httpGet:
               path: /health
               port: 80
-            initialDelaySeconds: 180
-            periodSeconds: 3
+            periodSeconds: 3 # 默认 10
+            failureThreshold: 2 # 默认 3
+            successThreshold: 1
+            timeoutSeconds: 1
       nodeSelector:
         kubernetes.io/os: linux
 ---
@@ -545,6 +597,14 @@ spec:
               memory: 300Mi
           ports:
             - containerPort: 80
+          readinessProbe:
+            httpGet:
+              port: 80
+              path: /health
+            periodSeconds: 3 # 默认 10
+            failureThreshold: 2 # 默认 3
+            successThreshold: 1
+            timeoutSeconds: 1
       nodeSelector:
         kubernetes.io/os: linux
 ---
@@ -602,11 +662,25 @@ spec:
                 - SETUID
                 - DAC_OVERRIDE
             readOnlyRootFilesystem: true
+          readinessProbe:
+            tcpSocket:
+              port: 5672
+            periodSeconds: 3 # 默认 10
+            failureThreshold: 2 # 默认 3
+            successThreshold: 1
+            timeoutSeconds: 1
         - name: rabbitmq-exporter
           image: kbudde/rabbitmq-exporter
           ports:
             - containerPort: 9090
               name: exporter
+          readinessProbe:
+            tcpSocket:
+              port: 9090
+            periodSeconds: 3 # 默认 10
+            failureThreshold: 2 # 默认 3
+            successThreshold: 1
+            timeoutSeconds: 1
       nodeSelector:
         kubernetes.io/os: linux
 ---
@@ -667,6 +741,16 @@ spec:
                 - SETGID
                 - SETUID
             readOnlyRootFilesystem: true
+          readinessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - redis-cli ping
+            periodSeconds: 3 # 默认 10
+            failureThreshold: 2 # 默认 3
+            successThreshold: 1
+            timeoutSeconds: 1
       nodeSelector:
         kubernetes.io/os: linux
 ---
@@ -731,6 +815,14 @@ spec:
           volumeMounts:
             - mountPath: /tmp
               name: tmp-volume
+          readinessProbe:
+            httpGet:
+              port: 80
+              path: /health
+            periodSeconds: 3 # 默认 10
+            failureThreshold: 2 # 默认 3
+            successThreshold: 1
+            timeoutSeconds: 1
       volumes:
         - name: tmp-volume
           emptyDir:
@@ -807,8 +899,10 @@ spec:
             httpGet:
               path: /health
               port: 80
-            initialDelaySeconds: 180
-            periodSeconds: 3
+            periodSeconds: 3 # 默认 10
+            failureThreshold: 2 # 默认 3
+            successThreshold: 1
+            timeoutSeconds: 1
       nodeSelector:
         kubernetes.io/os: linux
 ---
@@ -866,6 +960,16 @@ spec:
           volumeMounts:
             - mountPath: /tmp
               name: tmp-volume
+          readinessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - mongo --eval "db.runCommand('ping').ok"
+            periodSeconds: 3 # 默认 10
+            failureThreshold: 2 # 默认 3
+            successThreshold: 1
+            timeoutSeconds: 1
       volumes:
         - name: tmp-volume
           emptyDir:
@@ -887,4 +991,3 @@ spec:
       targetPort: 27017
   selector:
     name: user-db
-
