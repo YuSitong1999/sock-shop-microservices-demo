@@ -1,0 +1,81 @@
+2024-02-07T13:41:49.124246314Z .:53
+2024-02-07T13:41:49.124374286Z [INFO] plugin/reload: Running configuration SHA512 = 91f8b0e2b6db89886b0f2908535869072cbdd6171d2f14fd0c5eb76075aa3a33c85a86d51b0aae35acb0937d4ebcf01e80fb16c200d6f6484c2351cbe2110684
+2024-02-07T13:41:49.124381519Z CoreDNS-1.11.1
+2024-02-07T13:41:49.124385307Z linux/amd64, go1.20.7, ae2bbc2
+2024-02-07T13:41:49.126620858Z [INFO] 127.0.0.1 4037317521999121572.5695843966803547589. NXDOMAIN udp HINFO
+2024-02-07T13:42:42.810321092Z [INFO] 192.168.215.233 compass.mongodb.com.chaos-mesh.svc.cluster.local. NXDOMAIN udp A
+2024-02-07T13:42:42.813245160Z [INFO] 192.168.215.233 compass.mongodb.com.invalid. NXDOMAIN udp A
+2024-02-07T13:42:42.814324730Z [INFO] 192.168.215.233 compass.mongodb.com. NOERROR udp A
+2024-02-07T13:42:51.118067949Z [INFO] 192.168.215.230 mongodb.chaos-mesh.chaos-mesh.svc.cluster.local. NXDOMAIN udp AAAA
+2024-02-07T13:42:51.122474536Z [INFO] 192.168.215.230 mongodb.chaos-mesh.svc.cluster.local. NOERROR udp AAAA
+2024-02-07T13:42:51.127133966Z [INFO] 192.168.215.230 mongodb.chaos-mesh.chaos-mesh.svc.cluster.local. NXDOMAIN udp A
+2024-02-07T13:42:51.127292125Z [INFO] 192.168.215.230 mongodb.chaos-mesh.chaos-mesh.svc.cluster.local. NXDOMAIN udp AAAA
+2024-02-07T13:42:51.128481810Z [INFO] 192.168.215.230 mongodb.chaos-mesh.svc.cluster.local. NOERROR udp AAAA
+2024-02-07T13:45:25.161773073Z [INFO] 192.168.215.225 catalogue-db.sock-shop.svc.cluster.local. NOERROR udp A
+2024-02-07T13:45:26.606465153Z [INFO] 192.168.215.202 user-db.sock-shop.svc.cluster.local. NOERROR udp AAAA
+2024-02-07T13:45:27.914833045Z [INFO] 192.168.215.225 catalogue-db.sock-shop.svc.cluster.local. NOERROR udp AAAA
+2024-02-07T13:45:28.613226851Z [INFO] 192.168.215.202 user-db.sock-shop.svc.cluster.local. NOERROR udp AAAA
+2024-02-07T13:45:28.613270364Z [INFO] 192.168.215.202 user-db.sock-shop.svc.cluster.local. NOERROR udp A
+2024-02-07T13:45:30.517685506Z [INFO] 192.168.215.225 catalogue-db.sock-shop.svc.cluster.local. NOERROR udp AAAA
+2024-02-07T13:45:30.517774535Z [INFO] 192.168.215.225 catalogue-db.sock-shop.svc.cluster.local. NOERROR udp A
+2024-02-07T13:45:32.127591362Z [INFO] 192.168.215.202 user-db.sock-shop.svc.cluster.local. NOERROR udp AAAA
+2024-02-07T13:45:32.127737881Z [INFO] 192.168.215.202 user-db.sock-shop.svc.cluster.local. NOERROR udp A
+2024-02-07T13:45:33.521001029Z [INFO] 192.168.215.225 catalogue-db.sock-shop.svc.cluster.local. NOERROR udp A
+2024-02-07T13:45:34.133870242Z [INFO] 192.168.215.202 user-db.sock-shop.svc.cluster.local. NOERROR udp AAAA
+2024-02-07T13:45:36.517064996Z [INFO] 192.168.215.225 catalogue-db.sock-shop.svc.cluster.local. NOERROR udp AAAA
+2024-02-07T13:45:39.514179755Z [INFO] 192.168.215.225 catalogue-db.sock-shop.svc.cluster.local. NOERROR udp A
+2024-02-07T13:46:06.668735250Z [INFO] 192.168.215.202 user-db.sock-shop.svc.cluster.local. NOERROR udp A
+2024-02-07T13:46:58.552866242Z [INFO] 192.168.215.215 orders-db.sock-shop.svc.cluster.local. NOERROR udp A
+2024-02-07T13:47:07.676090392Z [INFO] 192.168.215.202 user-db.sock-shop.svc.cluster.local. NOERROR udp AAAA
+2024-02-07T13:47:38.178742293Z [INFO] 192.168.215.202 user-db.sock-shop.svc.cluster.local. NOERROR udp A
+2024-02-07T13:48:00.148447242Z [INFO] 192.168.215.238 rabbitmq.sock-shop.svc.cluster.local. NOERROR udp A
+2024-02-07T13:48:08.681506590Z [INFO] 192.168.215.202 user-db.sock-shop.svc.cluster.local. NOERROR udp A
+2024-02-07T13:48:08.681558463Z [INFO] 192.168.215.202 user-db.sock-shop.svc.cluster.local. NOERROR udp AAAA
+2024-02-07T13:48:31.141575443Z [INFO] 192.168.215.238 rabbitmq.sock-shop.svc.cluster.local. NOERROR udp A
+2024-02-07T13:48:39.185505371Z [INFO] 192.168.215.202 user-db.sock-shop.svc.cluster.local. NOERROR udp A
+2024-02-07T13:49:09.687796017Z [INFO] 192.168.215.202 user-db.sock-shop.svc.cluster.local. NOERROR udp A
+2024-02-07T13:50:01.870559095Z [INFO] 192.168.215.238 rabbitmq.sock-shop.svc.cluster.local. NOERROR udp A
+2024-02-07T13:50:08.870021719Z [INFO] 192.168.215.235 carts-db.sock-shop.svc.cluster.local. NOERROR udp A
+2024-02-07T13:50:10.694345320Z [INFO] 192.168.215.202 user-db.sock-shop.svc.cluster.local. NOERROR udp A
+2024-02-07T13:41:49.180900723Z .:53
+2024-02-07T13:41:49.181097865Z [INFO] plugin/reload: Running configuration SHA512 = 91f8b0e2b6db89886b0f2908535869072cbdd6171d2f14fd0c5eb76075aa3a33c85a86d51b0aae35acb0937d4ebcf01e80fb16c200d6f6484c2351cbe2110684
+2024-02-07T13:41:49.181113245Z CoreDNS-1.11.1
+2024-02-07T13:41:49.181124552Z linux/amd64, go1.20.7, ae2bbc2
+2024-02-07T13:41:49.182359557Z [INFO] 127.0.0.1 3797999386734633929.6558680547351661055. NXDOMAIN udp HINFO
+2024-02-07T13:42:42.811349857Z [INFO] 192.168.215.233 compass.mongodb.com.svc.cluster.local. NXDOMAIN udp A
+2024-02-07T13:42:42.811826700Z [INFO] 192.168.215.233 compass.mongodb.com.cluster.local. NXDOMAIN udp A
+2024-02-07T13:42:51.118067898Z [INFO] 192.168.215.230 mongodb.chaos-mesh.chaos-mesh.svc.cluster.local. NXDOMAIN udp A
+2024-02-07T13:42:51.123304572Z [INFO] 192.168.215.230 mongodb.chaos-mesh.svc.cluster.local. NOERROR udp A
+2024-02-07T13:42:51.128981248Z [INFO] 192.168.215.230 mongodb.chaos-mesh.svc.cluster.local. NOERROR udp A
+2024-02-07T13:45:25.161758542Z [INFO] 192.168.215.225 catalogue-db.sock-shop.svc.cluster.local. NOERROR udp AAAA
+2024-02-07T13:45:26.599922868Z [INFO] 192.168.215.202 user-db.sock-shop.svc.cluster.local. NOERROR udp A
+2024-02-07T13:45:27.917115224Z [INFO] 192.168.215.225 catalogue-db.sock-shop.svc.cluster.local. NOERROR udp A
+2024-02-07T13:45:30.617664688Z [INFO] 192.168.215.202 user-db.sock-shop.svc.cluster.local. NOERROR udp A
+2024-02-07T13:45:30.618209574Z [INFO] 192.168.215.202 user-db.sock-shop.svc.cluster.local. NOERROR udp AAAA
+2024-02-07T13:45:33.364041449Z [INFO] 192.168.215.226 session-db.sock-shop.svc.cluster.local. NOERROR udp A
+2024-02-07T13:45:33.520162630Z [INFO] 192.168.215.225 catalogue-db.sock-shop.svc.cluster.local. NOERROR udp AAAA
+2024-02-07T13:45:34.134373672Z [INFO] 192.168.215.202 user-db.sock-shop.svc.cluster.local. NOERROR udp A
+2024-02-07T13:45:36.517084080Z [INFO] 192.168.215.225 catalogue-db.sock-shop.svc.cluster.local. NOERROR udp A
+2024-02-07T13:45:39.514257392Z [INFO] 192.168.215.225 catalogue-db.sock-shop.svc.cluster.local. NOERROR udp AAAA
+2024-02-07T13:45:42.516675828Z [INFO] 192.168.215.225 catalogue-db.sock-shop.svc.cluster.local. NOERROR udp AAAA
+2024-02-07T13:45:42.516782874Z [INFO] 192.168.215.225 catalogue-db.sock-shop.svc.cluster.local. NOERROR udp A
+2024-02-07T13:46:06.668288681Z [INFO] 192.168.215.202 user-db.sock-shop.svc.cluster.local. NOERROR udp AAAA
+2024-02-07T13:46:37.172370454Z [INFO] 192.168.215.202 user-db.sock-shop.svc.cluster.local. NOERROR udp A
+2024-02-07T13:46:37.172713240Z [INFO] 192.168.215.202 user-db.sock-shop.svc.cluster.local. NOERROR udp AAAA
+2024-02-07T13:47:07.675016620Z [INFO] 192.168.215.202 user-db.sock-shop.svc.cluster.local. NOERROR udp A
+2024-02-07T13:47:38.179114293Z [INFO] 192.168.215.202 user-db.sock-shop.svc.cluster.local. NOERROR udp AAAA
+2024-02-07T13:47:57.847134475Z [INFO] 192.168.215.235 carts-db.sock-shop.svc.cluster.local. NOERROR udp A
+2024-02-07T13:48:05.369957172Z [INFO] 192.168.215.215 orders-db.sock-shop.svc.cluster.local. NOERROR udp A
+2024-02-07T13:48:39.185433364Z [INFO] 192.168.215.202 user-db.sock-shop.svc.cluster.local. NOERROR udp AAAA
+2024-02-07T13:49:01.370055854Z [INFO] 192.168.215.238 rabbitmq.sock-shop.svc.cluster.local. NOERROR udp A
+2024-02-07T13:49:09.687827718Z [INFO] 192.168.215.202 user-db.sock-shop.svc.cluster.local. NOERROR udp AAAA
+2024-02-07T13:49:31.793917502Z [INFO] 192.168.215.238 rabbitmq.sock-shop.svc.cluster.local. NOERROR udp A
+2024-02-07T13:49:34.755808055Z [INFO] 192.168.215.216 rabbitmq.sock-shop.svc.cluster.local. NOERROR udp A
+2024-02-07T13:49:40.190475344Z [INFO] 192.168.215.202 user-db.sock-shop.svc.cluster.local. NOERROR udp A
+2024-02-07T13:49:40.191128483Z [INFO] 192.168.215.202 user-db.sock-shop.svc.cluster.local. NOERROR udp AAAA
+2024-02-07T13:50:07.766855631Z [INFO] 192.168.215.216 rabbitmq.sock-shop.svc.cluster.local. NOERROR udp A
+2024-02-07T13:50:10.694542679Z [INFO] 192.168.215.202 user-db.sock-shop.svc.cluster.local. NOERROR udp AAAA
+2024-02-07T13:50:31.940526984Z [INFO] 192.168.215.238 rabbitmq.sock-shop.svc.cluster.local. NOERROR udp A
+2024-02-07T13:50:40.766062282Z [INFO] 192.168.215.216 rabbitmq.sock-shop.svc.cluster.local. NOERROR udp A
+2024-02-07T13:50:41.199816614Z [INFO] 192.168.215.202 user-db.sock-shop.svc.cluster.local. NOERROR udp A
+2024-02-07T13:50:41.199863221Z [INFO] 192.168.215.202 user-db.sock-shop.svc.cluster.local. NOERROR udp AAAA

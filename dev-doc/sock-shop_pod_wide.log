@@ -1,0 +1,15 @@
+NAME                            READY   STATUS    RESTARTS   AGE     IP                NODE                           NOMINATED NODE   READINESS GATES
+carts-84799d6bcc-mrrbs          1/1     Running   0          7m16s   192.168.215.235   vmi1640551.contaboserver.net   <none>           <none>
+carts-db-578958f87d-qvjz8       1/1     Running   0          7m15s   192.168.215.249   vmi1640551.contaboserver.net   <none>           <none>
+catalogue-db-7f8977f796-jflvn   1/1     Running   0          7m15s   192.168.215.227   vmi1640551.contaboserver.net   <none>           <none>
+catalogue-fd5d4fc5-tmjnb        1/1     Running   0          7m15s   192.168.215.225   vmi1640551.contaboserver.net   <none>           <none>
+front-end-57c6b98b4-brwqf       1/1     Running   0          7m15s   192.168.215.226   vmi1640551.contaboserver.net   <none>           <none>
+orders-7b46bd8449-m58xr         1/1     Running   0          7m15s   192.168.215.215   vmi1640551.contaboserver.net   <none>           <none>
+orders-db-bb4db647b-l8xd8       1/1     Running   0          7m15s   192.168.215.200   vmi1640551.contaboserver.net   <none>           <none>
+payment-558799d8b8-dmdkc        1/1     Running   0          7m15s   192.168.215.245   vmi1640551.contaboserver.net   <none>           <none>
+queue-master-8696cfb7f4-p85pk   1/1     Running   0          7m15s   192.168.215.238   vmi1640551.contaboserver.net   <none>           <none>
+rabbitmq-69b48dd746-fpzd7       1/2     Running   0          7m15s   192.168.215.246   vmi1640551.contaboserver.net   <none>           <none>
+session-db-85c648674b-d2k44     1/1     Running   0          7m14s   192.168.215.248   vmi1640551.contaboserver.net   <none>           <none>
+shipping-d779449f9-mh8bw        1/1     Running   0          7m14s   192.168.215.216   vmi1640551.contaboserver.net   <none>           <none>
+user-6d758cd4b6-khvj7           1/1     Running   0          7m14s   192.168.215.202   vmi1640551.contaboserver.net   <none>           <none>
+user-db-54f4fc4f79-cpknr        1/1     Running   0          7m14s   192.168.215.228   vmi1640551.contaboserver.net   <none>           <none>

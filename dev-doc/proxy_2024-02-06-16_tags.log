@@ -1,0 +1,866 @@
+2024-02-06T08:50:14.959Z	INFO	slog/slog.go:35	初始化日志 zap 成功
+2024-02-06T08:50:14.961Z	INFO	slog/slog.go:59	初始化日志 zap 成功
+2024-02-06T08:50:14.962Z	INFO	auto-test-proxy/main.go:30	CPU核数 6
+[Fx] PROVIDE	context.Context <= main.main.func1()
+[Fx] PROVIDE	*config.AutoTestProxyConfig <= main.main.func1()
+[Fx] PROVIDE	fx.Lifecycle <= go.uber.org/fx.New.func1()
+[Fx] PROVIDE	fx.Shutdowner <= go.uber.org/fx.(*App).shutdowner-fm()
+[Fx] PROVIDE	fx.DotGraph <= go.uber.org/fx.(*App).dotGraph-fm()
+[Fx] INVOKE		main.main.func2()
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[Fx] HOOK OnStart		main.main.func2.2() executing (caller: main.main.func2)
+[Fx] HOOK OnStart		main.main.func2.2() called by main.main.func2 ran successfully in 24.891µs
+[Fx] RUNNING
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /debug/pprof/             --> github.com/gin-contrib/pprof.pprofHandler.func1 (3 handlers)
+[GIN-debug] GET    /debug/pprof/cmdline      --> github.com/gin-contrib/pprof.pprofHandler.func1 (3 handlers)
+[GIN-debug] GET    /debug/pprof/profile      --> github.com/gin-contrib/pprof.pprofHandler.func1 (3 handlers)
+[GIN-debug] POST   /debug/pprof/symbol       --> github.com/gin-contrib/pprof.pprofHandler.func1 (3 handlers)
+[GIN-debug] GET    /debug/pprof/symbol       --> github.com/gin-contrib/pprof.pprofHandler.func1 (3 handlers)
+[GIN-debug] GET    /debug/pprof/trace        --> github.com/gin-contrib/pprof.pprofHandler.func1 (3 handlers)
+[GIN-debug] GET    /debug/pprof/allocs       --> github.com/gin-contrib/pprof.pprofHandler.func1 (3 handlers)
+[GIN-debug] GET    /debug/pprof/block        --> github.com/gin-contrib/pprof.pprofHandler.func1 (3 handlers)
+[GIN-debug] GET    /debug/pprof/goroutine    --> github.com/gin-contrib/pprof.pprofHandler.func1 (3 handlers)
+[GIN-debug] GET    /debug/pprof/heap         --> github.com/gin-contrib/pprof.pprofHandler.func1 (3 handlers)
+[GIN-debug] GET    /debug/pprof/mutex        --> github.com/gin-contrib/pprof.pprofHandler.func1 (3 handlers)
+[GIN-debug] GET    /debug/pprof/threadcreate --> github.com/gin-contrib/pprof.pprofHandler.func1 (3 handlers)
+[GIN-debug] GET    /admin/status             --> github.com/chaos-mesh/chaos-mesh/pkg/proxy/admin.GetAllStatus (3 handlers)
+[GIN-debug] POST   /admin/test               --> github.com/chaos-mesh/chaos-mesh/pkg/proxy/admin.CreateTestTask (3 handlers)
+[GIN-debug] GET    /healthz                  --> github.com/gin-gonic/gin.CustomRecoveryWithWriter.func1 (2 handlers)
+2024-02-06T08:50:14.976Z	INFO	admin/admin.go:23	管理服务API	{"address": "0.0.0.0:1025"}
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on 0.0.0.0:1025
+2024-02-06T08:50:23.379Z	INFO	admin/controllers.go:49	CreateTestTask testtask.TestTask{TestNamespace:"test-front-end", Retry:0, RequestTimeout:10, DNSFunctionEnabled:false, DeployOnDemandEnabled:false, SkipSameStatusCodeEnabled:true, FaultIDList:[]fault.IDType{0, 4, 18}, MicroserviceFaultList:[]testtask.MicroserviceFault{}, MicroserviceFaultFullList:[]testtask.MicroserviceFaultFull(nil), Request:(*reqresp.Request)(0xc000212180), Microservices:[]micro.Microservice{micro.Microservice{ID:1, Name:"carts", ServiceBox:micro.ServiceBox{ServiceYaml:"apiVersion: v1\nkind: Service\nmetadata:\n  name: carts\n  annotations:\n    prometheus.io/scrape: 'true'\n  labels:\n    name: carts\n  namespace: sock-shop\nspec:\n  ports:\n    \n    - port: 80\n      targetPort: 80\n  selector:\n    name: carts", Service:(*v1.Service)(nil)}, DeployBox:micro.DeployBox{DeployYaml:"apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: carts\n  labels:\n    name: carts\n  namespace: sock-shop\nspec:\n  replicas: 1\n  selector:\n    matchLabels:\n      name: carts\n  template:\n    metadata:\n      labels:\n        name: carts\n    spec:\n      containers:\n        - name: carts\n          image: weaveworksdemos/carts:0.4.8\n          env:\n            - name: JAVA_OPTS\n              value: -Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false\n          resources:\n            limits:\n              cpu: 300m\n              memory: 500Mi\n            requests:\n              cpu: 100m\n              memory: 200Mi\n          ports:\n            - containerPort: 80\n          securityContext:\n            runAsNonRoot: true\n            runAsUser: 10001\n            capabilities:\n              drop:\n                - all\n              add:\n                - NET_BIND_SERVICE\n            readOnlyRootFilesystem: true\n          volumeMounts:\n            - mountPath: /tmp\n              name: tmp-volume\n          readinessProbe:\n            httpGet:\n              port: 80\n              path: /health\n            periodSeconds: 3 \n            failureThreshold: 2 \n            successThreshold: 1\n            timeoutSeconds: 1\n      volumes:\n        - name: tmp-volume\n          emptyDir:\n            medium: Memory\n      nodeSelector:\n        kubernetes.io/os: linux", Deploy:(*v1.Deployment)(nil)}, PodLabels:map[string]string(nil)}, micro.Microservice{ID:2, Name:"carts-db", ServiceBox:micro.ServiceBox{ServiceYaml:"apiVersion: v1\nkind: Service\nmetadata:\n  name: carts-db\n  labels:\n    name: carts-db\n  namespace: sock-shop\nspec:\n  ports:\n    \n    - port: 27017\n      targetPort: 27017\n  selector:\n    name: carts-db", Service:(*v1.Service)(nil)}, DeployBox:micro.DeployBox{DeployYaml:"apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: carts-db\n  labels:\n    name: carts-db\n  namespace: sock-shop\nspec:\n  replicas: 1\n  selector:\n    matchLabels:\n      name: carts-db\n  template:\n    metadata:\n      labels:\n        name: carts-db\n    spec:\n      containers:\n        - name: carts-db\n          image: mongo:3.4 \n          ports:\n            - name: mongo\n              containerPort: 27017\n          securityContext:\n            capabilities:\n              drop:\n                - all\n              add:\n                - CHOWN\n                - SETGID\n                - SETUID\n            readOnlyRootFilesystem: true\n          volumeMounts:\n            - mountPath: /tmp\n              name: tmp-volume\n          readinessProbe:\n            exec:\n              command:\n                - sh\n                - -c\n                - mongo --eval \"db.runCommand('ping').ok\"\n            periodSeconds: 3 \n            failureThreshold: 2 \n            successThreshold: 1\n            timeoutSeconds: 1\n      volumes:\n        - name: tmp-volume\n          emptyDir:\n            medium: Memory\n      nodeSelector:\n        kubernetes.io/os: linux", Deploy:(*v1.Deployment)(nil)}, PodLabels:map[string]string(nil)}, micro.Microservice{ID:3, Name:"catalogue", ServiceBox:micro.ServiceBox{ServiceYaml:"apiVersion: v1\nkind: Service\nmetadata:\n  name: catalogue\n  annotations:\n    prometheus.io/scrape: 'true'\n  labels:\n    name: catalogue\n  namespace: sock-shop\nspec:\n  ports:\n    \n    - port: 80\n      targetPort: 80\n  selector:\n    name: catalogue", Service:(*v1.Service)(nil)}, DeployBox:micro.DeployBox{DeployYaml:"apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: catalogue\n  labels:\n    name: catalogue\n  namespace: sock-shop\nspec:\n  replicas: 1\n  selector:\n    matchLabels:\n      name: catalogue\n  template:\n    metadata:\n      labels:\n        name: catalogue\n    spec:\n      containers:\n        - name: catalogue\n          image: weaveworksdemos/catalogue:0.3.5\n          command: [ \"/app\" ]\n          args:\n            - -port=80\n          resources:\n            limits:\n              cpu: 200m\n              memory: 200Mi\n            requests:\n              cpu: 100m\n              memory: 100Mi\n          ports:\n            - containerPort: 80\n          securityContext:\n            runAsNonRoot: true\n            runAsUser: 10001\n            capabilities:\n              drop:\n                - all\n              add:\n                - NET_BIND_SERVICE\n            readOnlyRootFilesystem: true\n          livenessProbe:\n            httpGet:\n              path: /health\n              port: 80\n            initialDelaySeconds: 300\n            periodSeconds: 3\n          readinessProbe:\n            httpGet:\n              path: /health\n              port: 80\n            periodSeconds: 3 \n            failureThreshold: 2 \n            successThreshold: 1\n            timeoutSeconds: 1\n      nodeSelector:\n        kubernetes.io/os: linux", Deploy:(*v1.Deployment)(nil)}, PodLabels:map[string]string(nil)}, micro.Microservice{ID:4, Name:"catalogue-db", ServiceBox:micro.ServiceBox{ServiceYaml:"apiVersion: v1\nkind: Service\nmetadata:\n  name: catalogue-db\n  labels:\n    name: catalogue-db\n  namespace: sock-shop\nspec:\n  ports:\n    \n    - port: 3306\n      targetPort: 3306\n  selector:\n    name: catalogue-db", Service:(*v1.Service)(nil)}, DeployBox:micro.DeployBox{DeployYaml:"apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: catalogue-db\n  labels:\n    name: catalogue-db\n  namespace: sock-shop\nspec:\n  replicas: 1\n  selector:\n    matchLabels:\n      name: catalogue-db\n  template:\n    metadata:\n      labels:\n        name: catalogue-db\n    spec:\n      containers:\n        - name: catalogue-db\n          image: weaveworksdemos/catalogue-db:0.3.5\n          env:\n            - name: MYSQL_ROOT_PASSWORD\n              value: fake_password\n            - name: MYSQL_DATABASE\n              value: socksdb\n          ports:\n            - name: mysql\n              containerPort: 3306\n          readinessProbe:\n            exec:\n              command:\n                - sh\n                - -c\n                - mysqladmin ping -h localhost\n            periodSeconds: 3 \n            failureThreshold: 2 \n            successThreshold: 1\n            timeoutSeconds: 1\n      nodeSelector:\n        kubernetes.io/os: linux", Deploy:(*v1.Deployment)(nil)}, PodLabels:map[string]string(nil)}, micro.Microservice{ID:5, Name:"front-end", ServiceBox:micro.ServiceBox{ServiceYaml:"apiVersion: v1\nkind: Service\nmetadata:\n  name: front-end\n  annotations:\n    prometheus.io/scrape: 'true'\n  labels:\n    name: front-end\n  namespace: sock-shop\nspec:\n  type: NodePort\n  ports:\n    - port: 80\n      targetPort: 8079\n      nodePort: 30001\n  selector:\n    name: front-end", Service:(*v1.Service)(nil)}, DeployBox:micro.DeployBox{DeployYaml:"apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: front-end\n  namespace: sock-shop\nspec:\n  replicas: 1\n  selector:\n    matchLabels:\n      name: front-end\n  template:\n    metadata:\n      labels:\n        name: front-end\n    spec:\n      containers:\n        - name: front-end\n          image: weaveworksdemos/front-end:0.3.12\n          resources:\n            limits:\n              cpu: 300m\n              memory: 1000Mi\n            requests:\n              cpu: 100m\n              memory: 300Mi\n          ports:\n            - containerPort: 8079\n          env:\n            - name: SESSION_REDIS\n              value: \"true\"\n          securityContext:\n            runAsNonRoot: true\n            runAsUser: 10001\n            capabilities:\n              drop:\n                - all\n            readOnlyRootFilesystem: true\n          livenessProbe:\n            httpGet:\n              path: /\n              port: 8079\n            initialDelaySeconds: 300\n            periodSeconds: 3\n          readinessProbe:\n            httpGet:\n              path: /\n              port: 8079\n            periodSeconds: 3 \n            failureThreshold: 2 \n            successThreshold: 1\n            timeoutSeconds: 1\n      nodeSelector:\n        kubernetes.io/os: linux", Deploy:(*v1.Deployment)(nil)}, PodLabels:map[string]string(nil)}, micro.Microservice{ID:6, Name:"orders", ServiceBox:micro.ServiceBox{ServiceYaml:"apiVersion: v1\nkind: Service\nmetadata:\n  name: orders\n  annotations:\n    prometheus.io/scrape: 'true'\n  labels:\n    name: orders\n  namespace: sock-shop\nspec:\n  ports:\n    \n    - port: 80\n      targetPort: 80\n  selector:\n    name: orders", Service:(*v1.Service)(nil)}, DeployBox:micro.DeployBox{DeployYaml:"apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: orders\n  labels:\n    name: orders\n  namespace: sock-shop\nspec:\n  replicas: 1\n  selector:\n    matchLabels:\n      name: orders\n  template:\n    metadata:\n      labels:\n        name: orders\n    spec:\n      containers:\n        - name: orders\n          image: weaveworksdemos/orders:0.4.7\n          env:\n            - name: JAVA_OPTS\n              value: -Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false\n          resources:\n            limits:\n              cpu: 500m\n              memory: 500Mi\n            requests:\n              cpu: 100m\n              memory: 300Mi\n          ports:\n            - containerPort: 80\n          securityContext:\n            runAsNonRoot: true\n            runAsUser: 10001\n            capabilities:\n              drop:\n                - all\n              add:\n                - NET_BIND_SERVICE\n            readOnlyRootFilesystem: true\n          volumeMounts:\n            - mountPath: /tmp\n              name: tmp-volume\n          readinessProbe:\n            httpGet:\n              port: 80\n              path: /health\n            periodSeconds: 3 \n            failureThreshold: 2 \n            successThreshold: 1\n            timeoutSeconds: 1\n      volumes:\n        - name: tmp-volume\n          emptyDir:\n            medium: Memory\n      nodeSelector:\n        kubernetes.io/os: linux", Deploy:(*v1.Deployment)(nil)}, PodLabels:map[string]string(nil)}, micro.Microservice{ID:7, Name:"orders-db", ServiceBox:micro.ServiceBox{ServiceYaml:"apiVersion: v1\nkind: Service\nmetadata:\n  name: orders-db\n  labels:\n    name: orders-db\n  namespace: sock-shop\nspec:\n  ports:\n    \n    - port: 27017\n      targetPort: 27017\n  selector:\n    name: orders-db", Service:(*v1.Service)(nil)}, DeployBox:micro.DeployBox{DeployYaml:"apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: orders-db\n  labels:\n    name: orders-db\n  namespace: sock-shop\nspec:\n  replicas: 1\n  selector:\n    matchLabels:\n      name: orders-db\n  template:\n    metadata:\n      labels:\n        name: orders-db\n    spec:\n      containers:\n        - name: orders-db\n          image: mongo:3.4 \n          ports:\n            - name: mongo\n              containerPort: 27017\n          securityContext:\n            capabilities:\n              drop:\n                - all\n              add:\n                - CHOWN\n                - SETGID\n                - SETUID\n            readOnlyRootFilesystem: true\n          volumeMounts:\n            - mountPath: /tmp\n              name: tmp-volume\n          readinessProbe:\n            exec:\n              command:\n                - sh\n                - -c\n                - mongo --eval \"db.runCommand('ping').ok\"\n            periodSeconds: 3 \n            failureThreshold: 2 \n            successThreshold: 1\n            timeoutSeconds: 1\n      volumes:\n        - name: tmp-volume\n          emptyDir:\n            medium: Memory\n      nodeSelector:\n        kubernetes.io/os: linux", Deploy:(*v1.Deployment)(nil)}, PodLabels:map[string]string(nil)}, micro.Microservice{ID:8, Name:"payment", ServiceBox:micro.ServiceBox{ServiceYaml:"apiVersion: v1\nkind: Service\nmetadata:\n  name: payment\n  annotations:\n    prometheus.io/scrape: 'true'\n  labels:\n    name: payment\n  namespace: sock-shop\nspec:\n  ports:\n    \n    - port: 80\n      targetPort: 80\n  selector:\n    name: payment", Service:(*v1.Service)(nil)}, DeployBox:micro.DeployBox{DeployYaml:"apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: payment\n  labels:\n    name: payment\n  namespace: sock-shop\nspec:\n  replicas: 1\n  selector:\n    matchLabels:\n      name: payment\n  template:\n    metadata:\n      labels:\n        name: payment\n    spec:\n      containers:\n        - name: payment\n          image: weaveworksdemos/payment:0.4.3\n          resources:\n            limits:\n              cpu: 200m\n              memory: 200Mi\n            requests:\n              cpu: 99m\n              memory: 100Mi\n          ports:\n            - containerPort: 80\n          securityContext:\n            runAsNonRoot: true\n            runAsUser: 10001\n            capabilities:\n              drop:\n                - all\n              add:\n                - NET_BIND_SERVICE\n            readOnlyRootFilesystem: true\n          livenessProbe:\n            httpGet:\n              path: /health\n              port: 80\n            initialDelaySeconds: 300\n            periodSeconds: 3\n          readinessProbe:\n            httpGet:\n              path: /health\n              port: 80\n            periodSeconds: 3 \n            failureThreshold: 2 \n            successThreshold: 1\n            timeoutSeconds: 1\n      nodeSelector:\n        kubernetes.io/os: linux", Deploy:(*v1.Deployment)(nil)}, PodLabels:map[string]string(nil)}, micro.Microservice{ID:9, Name:"queue-master", ServiceBox:micro.ServiceBox{ServiceYaml:"apiVersion: v1\nkind: Service\nmetadata:\n  name: queue-master\n  annotations:\n    prometheus.io/scrape: 'true'\n  labels:\n    name: queue-master\n  namespace: sock-shop\nspec:\n  ports:\n    \n    - port: 80\n      targetPort: 80\n  selector:\n    name: queue-master", Service:(*v1.Service)(nil)}, DeployBox:micro.DeployBox{DeployYaml:"apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: queue-master\n  labels:\n    name: queue-master\n  namespace: sock-shop\nspec:\n  replicas: 1\n  selector:\n    matchLabels:\n      name: queue-master\n  template:\n    metadata:\n      labels:\n        name: queue-master\n    spec:\n      containers:\n        - name: queue-master\n          image: weaveworksdemos/queue-master:0.3.1\n          env:\n            - name: JAVA_OPTS\n              value: -Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false\n          resources:\n            limits:\n              cpu: 300m\n              memory: 500Mi\n            requests:\n              cpu: 100m\n              memory: 300Mi\n          ports:\n            - containerPort: 80\n          readinessProbe:\n            httpGet:\n              port: 80\n              path: /health\n            periodSeconds: 3 \n            failureThreshold: 2 \n            successThreshold: 1\n            timeoutSeconds: 1\n      nodeSelector:\n        kubernetes.io/os: linux", Deploy:(*v1.Deployment)(nil)}, PodLabels:map[string]string(nil)}, micro.Microservice{ID:10, Name:"rabbitmq", ServiceBox:micro.ServiceBox{ServiceYaml:"apiVersion: v1\nkind: Service\nmetadata:\n  name: rabbitmq\n  annotations:\n    prometheus.io/scrape: 'true'\n    prometheus.io/port: '9090'\n  labels:\n    name: rabbitmq\n  namespace: sock-shop\nspec:\n  ports:\n    \n    - port: 5672\n      name: rabbitmq\n      targetPort: 5672\n    - port: 9090\n      name: exporter\n      targetPort: exporter\n      protocol: TCP\n  selector:\n    name: rabbitmq", Service:(*v1.Service)(nil)}, DeployBox:micro.DeployBox{DeployYaml:"apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: rabbitmq\n  labels:\n    name: rabbitmq\n  namespace: sock-shop\nspec:\n  replicas: 1\n  selector:\n    matchLabels:\n      name: rabbitmq\n  template:\n    metadata:\n      labels:\n        name: rabbitmq\n      annotations:\n        prometheus.io/scrape: \"false\"\n    spec:\n      containers:\n        - name: rabbitmq\n          image: rabbitmq:3.6.8-management\n          ports:\n            - containerPort: 15672\n              name: management\n            - containerPort: 5672\n              name: rabbitmq\n          securityContext:\n            capabilities:\n              drop:\n                - all\n              add:\n                - CHOWN\n                - SETGID\n                - SETUID\n                - DAC_OVERRIDE\n            readOnlyRootFilesystem: true\n          readinessProbe:\n            tcpSocket:\n              port: 5672\n            periodSeconds: 3 \n            failureThreshold: 2 \n            successThreshold: 1\n            timeoutSeconds: 1\n        - name: rabbitmq-exporter\n          image: kbudde/rabbitmq-exporter\n          ports:\n            - containerPort: 9090\n              name: exporter\n          readinessProbe:\n            tcpSocket:\n              port: 9090\n            periodSeconds: 3 \n            failureThreshold: 2 \n            successThreshold: 1\n            timeoutSeconds: 1\n      nodeSelector:\n        kubernetes.io/os: linux", Deploy:(*v1.Deployment)(nil)}, PodLabels:map[string]string(nil)}, micro.Microservice{ID:11, Name:"session-db", ServiceBox:micro.ServiceBox{ServiceYaml:"apiVersion: v1\nkind: Service\nmetadata:\n  name: session-db\n  labels:\n    name: session-db\n  namespace: sock-shop\nspec:\n  ports:\n    \n    - port: 6379\n      targetPort: 6379\n  selector:\n    name: session-db", Service:(*v1.Service)(nil)}, DeployBox:micro.DeployBox{DeployYaml:"apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: session-db\n  labels:\n    name: session-db\n  namespace: sock-shop\nspec:\n  replicas: 1\n  selector:\n    matchLabels:\n      name: session-db\n  template:\n    metadata:\n      labels:\n        name: session-db\n      annotations:\n        prometheus.io.scrape: \"false\"\n    spec:\n      containers:\n        - name: session-db\n          image: redis:alpine\n          ports:\n            - name: redis\n              containerPort: 6379\n          securityContext:\n            capabilities:\n              drop:\n                - all\n              add:\n                - CHOWN\n                - SETGID\n                - SETUID\n            readOnlyRootFilesystem: true\n          readinessProbe:\n            exec:\n              command:\n                - sh\n                - -c\n                - redis-cli ping\n            periodSeconds: 3 \n            failureThreshold: 2 \n            successThreshold: 1\n            timeoutSeconds: 1\n      nodeSelector:\n        kubernetes.io/os: linux", Deploy:(*v1.Deployment)(nil)}, PodLabels:map[string]string(nil)}, micro.Microservice{ID:12, Name:"shipping", ServiceBox:micro.ServiceBox{ServiceYaml:"apiVersion: v1\nkind: Service\nmetadata:\n  name: shipping\n  annotations:\n    prometheus.io/scrape: 'true'\n  labels:\n    name: shipping\n  namespace: sock-shop\nspec:\n  ports:\n    \n    - port: 80\n      targetPort: 80\n  selector:\n    name: shipping", Service:(*v1.Service)(nil)}, DeployBox:micro.DeployBox{DeployYaml:"apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: shipping\n  labels:\n    name: shipping\n  namespace: sock-shop\nspec:\n  replicas: 1\n  selector:\n    matchLabels:\n      name: shipping\n  template:\n    metadata:\n      labels:\n        name: shipping\n    spec:\n      containers:\n        - name: shipping\n          image: weaveworksdemos/shipping:0.4.8\n          env:\n            - name: ZIPKIN\n              value: zipkin.jaeger.svc.cluster.local\n            - name: JAVA_OPTS\n              value: -Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false\n          resources:\n            limits:\n              cpu: 300m\n              memory: 500Mi\n            requests:\n              cpu: 100m\n              memory: 300Mi\n          ports:\n            - containerPort: 80\n          securityContext:\n            runAsNonRoot: true\n            runAsUser: 10001\n            capabilities:\n              drop:\n                - all\n              add:\n                - NET_BIND_SERVICE\n            readOnlyRootFilesystem: true\n          volumeMounts:\n            - mountPath: /tmp\n              name: tmp-volume\n          readinessProbe:\n            httpGet:\n              port: 80\n              path: /health\n            periodSeconds: 3 \n            failureThreshold: 2 \n            successThreshold: 1\n            timeoutSeconds: 1\n      volumes:\n        - name: tmp-volume\n          emptyDir:\n            medium: Memory\n      nodeSelector:\n        kubernetes.io/os: linux", Deploy:(*v1.Deployment)(nil)}, PodLabels:map[string]string(nil)}, micro.Microservice{ID:13, Name:"user", ServiceBox:micro.ServiceBox{ServiceYaml:"apiVersion: v1\nkind: Service\nmetadata:\n  name: user\n  annotations:\n    prometheus.io/scrape: 'true'\n  labels:\n    name: user\n  namespace: sock-shop\nspec:\n  ports:\n    \n    - port: 80\n      targetPort: 80\n  selector:\n    name: user", Service:(*v1.Service)(nil)}, DeployBox:micro.DeployBox{DeployYaml:"apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: user\n  labels:\n    name: user\n  namespace: sock-shop\nspec:\n  replicas: 1\n  selector:\n    matchLabels:\n      name: user\n  template:\n    metadata:\n      labels:\n        name: user\n    spec:\n      containers:\n        - name: user\n          image: weaveworksdemos/user:0.4.7\n          resources:\n            limits:\n              cpu: 300m\n              memory: 200Mi\n            requests:\n              cpu: 100m\n              memory: 100Mi\n          ports:\n            - containerPort: 80\n          env:\n            - name: mongo\n              value: user-db:27017\n          securityContext:\n            runAsNonRoot: true\n            runAsUser: 10001\n            capabilities:\n              drop:\n                - all\n              add:\n                - NET_BIND_SERVICE\n            readOnlyRootFilesystem: true\n          livenessProbe:\n            httpGet:\n              path: /health\n              port: 80\n            initialDelaySeconds: 300\n            periodSeconds: 3\n          readinessProbe:\n            httpGet:\n              path: /health\n              port: 80\n            periodSeconds: 3 \n            failureThreshold: 2 \n            successThreshold: 1\n            timeoutSeconds: 1\n      nodeSelector:\n        kubernetes.io/os: linux", Deploy:(*v1.Deployment)(nil)}, PodLabels:map[string]string(nil)}, micro.Microservice{ID:14, Name:"user-db", ServiceBox:micro.ServiceBox{ServiceYaml:"apiVersion: v1\nkind: Service\nmetadata:\n  name: user-db\n  labels:\n    name: user-db\n  namespace: sock-shop\nspec:\n  ports:\n    \n    - port: 27017\n      targetPort: 27017\n  selector:\n    name: user-db", Service:(*v1.Service)(nil)}, DeployBox:micro.DeployBox{DeployYaml:"apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: user-db\n  labels:\n    name: user-db\n  namespace: sock-shop\nspec:\n  replicas: 1\n  selector:\n    matchLabels:\n      name: user-db\n  template:\n    metadata:\n      labels:\n        name: user-db\n    spec:\n      containers:\n        - name: user-db\n          image: weaveworksdemos/user-db:0.4.7\n          \n          ports:\n            - name: mongo\n              containerPort: 27017\n          securityContext:\n            capabilities:\n              drop:\n                - all\n              add:\n                - CHOWN\n                - SETGID\n                - SETUID\n            readOnlyRootFilesystem: true\n          volumeMounts:\n            - mountPath: /tmp\n              name: tmp-volume\n          readinessProbe:\n            exec:\n              command:\n                - sh\n                - -c\n                - mongo --eval \"db.runCommand('ping').ok\"\n            periodSeconds: 3 \n            failureThreshold: 2 \n            successThreshold: 1\n            timeoutSeconds: 1\n      volumes:\n        - name: tmp-volume\n          emptyDir:\n            medium: Memory\n      nodeSelector:\n        kubernetes.io/os: linux", Deploy:(*v1.Deployment)(nil)}, PodLabels:map[string]string(nil)}}, DataPorts:[]int{80, 3306, 5672, 6379, 8079, 9090, 27017}}
+2024-02-06T08:50:23.379Z	DEBUG	admin/controllers.go:59	设置微服务候选故障
+FaultIDList
+[0 4 18]
+MicroserviceFaultList
+[]testtask.MicroserviceFault{}
+[GIN] 2024/02/06 - 08:50:23 | 200 |    3.847404ms | 192.168.215.212 | POST     "/admin/test"
+2024-02-06T08:50:23.403Z	INFO	k8s/k8s.go:324	创建被测服务 Service carts 路由到代理
+2024-02-06T08:50:23.447Z	INFO	k8s/k8s.go:317	被测服务 carts-db 是数据库，不代理: micro.Microservice{ID:2, Name:"carts-db", ServiceBox:micro.ServiceBox{ServiceYaml:"apiVersion: v1\nkind: Service\nmetadata:\n  name: carts-db\n  labels:\n    name: carts-db\n  namespace: sock-shop\nspec:\n  ports:\n    \n    - port: 27017\n      targetPort: 27017\n  selector:\n    name: carts-db", Service:(*v1.Service)(0xc0002b8f00)}, DeployBox:micro.DeployBox{DeployYaml:"apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: carts-db\n  labels:\n    name: carts-db\n  namespace: sock-shop\nspec:\n  replicas: 1\n  selector:\n    matchLabels:\n      name: carts-db\n  template:\n    metadata:\n      labels:\n        name: carts-db\n    spec:\n      containers:\n        - name: carts-db\n          image: mongo:3.4 \n          ports:\n            - name: mongo\n              containerPort: 27017\n          securityContext:\n            capabilities:\n              drop:\n                - all\n              add:\n                - CHOWN\n                - SETGID\n                - SETUID\n            readOnlyRootFilesystem: true\n          volumeMounts:\n            - mountPath: /tmp\n              name: tmp-volume\n          readinessProbe:\n            exec:\n              command:\n                - sh\n                - -c\n                - mongo --eval \"db.runCommand('ping').ok\"\n            periodSeconds: 3 \n            failureThreshold: 2 \n            successThreshold: 1\n            timeoutSeconds: 1\n      volumes:\n        - name: tmp-volume\n          emptyDir:\n            medium: Memory\n      nodeSelector:\n        kubernetes.io/os: linux", Deploy:(*v1.Deployment)(0xc0006bf400)}, PodLabels:map[string]string(nil)}
+2024-02-06T08:50:23.448Z	INFO	k8s/k8s.go:324	创建被测服务 Service catalogue 路由到代理
+2024-02-06T08:50:23.478Z	INFO	k8s/k8s.go:317	被测服务 catalogue-db 是数据库，不代理: micro.Microservice{ID:4, Name:"catalogue-db", ServiceBox:micro.ServiceBox{ServiceYaml:"apiVersion: v1\nkind: Service\nmetadata:\n  name: catalogue-db\n  labels:\n    name: catalogue-db\n  namespace: sock-shop\nspec:\n  ports:\n    \n    - port: 3306\n      targetPort: 3306\n  selector:\n    name: catalogue-db", Service:(*v1.Service)(0xc0006c4a00)}, DeployBox:micro.DeployBox{DeployYaml:"apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: catalogue-db\n  labels:\n    name: catalogue-db\n  namespace: sock-shop\nspec:\n  replicas: 1\n  selector:\n    matchLabels:\n      name: catalogue-db\n  template:\n    metadata:\n      labels:\n        name: catalogue-db\n    spec:\n      containers:\n        - name: catalogue-db\n          image: weaveworksdemos/catalogue-db:0.3.5\n          env:\n            - name: MYSQL_ROOT_PASSWORD\n              value: fake_password\n            - name: MYSQL_DATABASE\n              value: socksdb\n          ports:\n            - name: mysql\n              containerPort: 3306\n          readinessProbe:\n            exec:\n              command:\n                - sh\n                - -c\n                - mysqladmin ping -h localhost\n            periodSeconds: 3 \n            failureThreshold: 2 \n            successThreshold: 1\n            timeoutSeconds: 1\n      nodeSelector:\n        kubernetes.io/os: linux", Deploy:(*v1.Deployment)(0xc0001c8500)}, PodLabels:map[string]string(nil)}
+2024-02-06T08:50:23.478Z	INFO	k8s/k8s.go:324	创建被测服务 Service front-end 路由到代理
+2024-02-06T08:50:23.529Z	INFO	k8s/k8s.go:324	创建被测服务 Service orders 路由到代理
+2024-02-06T08:50:23.553Z	INFO	k8s/k8s.go:317	被测服务 orders-db 是数据库，不代理: micro.Microservice{ID:7, Name:"orders-db", ServiceBox:micro.ServiceBox{ServiceYaml:"apiVersion: v1\nkind: Service\nmetadata:\n  name: orders-db\n  labels:\n    name: orders-db\n  namespace: sock-shop\nspec:\n  ports:\n    \n    - port: 27017\n      targetPort: 27017\n  selector:\n    name: orders-db", Service:(*v1.Service)(0xc000004c80)}, DeployBox:micro.DeployBox{DeployYaml:"apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: orders-db\n  labels:\n    name: orders-db\n  namespace: sock-shop\nspec:\n  replicas: 1\n  selector:\n    matchLabels:\n      name: orders-db\n  template:\n    metadata:\n      labels:\n        name: orders-db\n    spec:\n      containers:\n        - name: orders-db\n          image: mongo:3.4 \n          ports:\n            - name: mongo\n              containerPort: 27017\n          securityContext:\n            capabilities:\n              drop:\n                - all\n              add:\n                - CHOWN\n                - SETGID\n                - SETUID\n            readOnlyRootFilesystem: true\n          volumeMounts:\n            - mountPath: /tmp\n              name: tmp-volume\n          readinessProbe:\n            exec:\n              command:\n                - sh\n                - -c\n                - mongo --eval \"db.runCommand('ping').ok\"\n            periodSeconds: 3 \n            failureThreshold: 2 \n            successThreshold: 1\n            timeoutSeconds: 1\n      volumes:\n        - name: tmp-volume\n          emptyDir:\n            medium: Memory\n      nodeSelector:\n        kubernetes.io/os: linux", Deploy:(*v1.Deployment)(0xc000134f00)}, PodLabels:map[string]string(nil)}
+2024-02-06T08:50:23.553Z	INFO	k8s/k8s.go:324	创建被测服务 Service payment 路由到代理
+2024-02-06T08:50:23.574Z	INFO	k8s/k8s.go:324	创建被测服务 Service queue-master 路由到代理
+2024-02-06T08:50:23.589Z	INFO	k8s/k8s.go:324	创建被测服务 Service rabbitmq 路由到代理
+2024-02-06T08:50:23.619Z	INFO	k8s/k8s.go:317	被测服务 session-db 是数据库，不代理: micro.Microservice{ID:11, Name:"session-db", ServiceBox:micro.ServiceBox{ServiceYaml:"apiVersion: v1\nkind: Service\nmetadata:\n  name: session-db\n  labels:\n    name: session-db\n  namespace: sock-shop\nspec:\n  ports:\n    \n    - port: 6379\n      targetPort: 6379\n  selector:\n    name: session-db", Service:(*v1.Service)(0xc0004ba000)}, DeployBox:micro.DeployBox{DeployYaml:"apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: session-db\n  labels:\n    name: session-db\n  namespace: sock-shop\nspec:\n  replicas: 1\n  selector:\n    matchLabels:\n      name: session-db\n  template:\n    metadata:\n      labels:\n        name: session-db\n      annotations:\n        prometheus.io.scrape: \"false\"\n    spec:\n      containers:\n        - name: session-db\n          image: redis:alpine\n          ports:\n            - name: redis\n              containerPort: 6379\n          securityContext:\n            capabilities:\n              drop:\n                - all\n              add:\n                - CHOWN\n                - SETGID\n                - SETUID\n            readOnlyRootFilesystem: true\n          readinessProbe:\n            exec:\n              command:\n                - sh\n                - -c\n                - redis-cli ping\n            periodSeconds: 3 \n            failureThreshold: 2 \n            successThreshold: 1\n            timeoutSeconds: 1\n      nodeSelector:\n        kubernetes.io/os: linux", Deploy:(*v1.Deployment)(0xc0001d8f00)}, PodLabels:map[string]string(nil)}
+2024-02-06T08:50:23.619Z	INFO	k8s/k8s.go:324	创建被测服务 Service shipping 路由到代理
+2024-02-06T08:50:23.638Z	INFO	k8s/k8s.go:324	创建被测服务 Service user 路由到代理
+2024-02-06T08:50:23.654Z	INFO	k8s/k8s.go:317	被测服务 user-db 是数据库，不代理: micro.Microservice{ID:14, Name:"user-db", ServiceBox:micro.ServiceBox{ServiceYaml:"apiVersion: v1\nkind: Service\nmetadata:\n  name: user-db\n  labels:\n    name: user-db\n  namespace: sock-shop\nspec:\n  ports:\n    \n    - port: 27017\n      targetPort: 27017\n  selector:\n    name: user-db", Service:(*v1.Service)(0xc000677900)}, DeployBox:micro.DeployBox{DeployYaml:"apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: user-db\n  labels:\n    name: user-db\n  namespace: sock-shop\nspec:\n  replicas: 1\n  selector:\n    matchLabels:\n      name: user-db\n  template:\n    metadata:\n      labels:\n        name: user-db\n    spec:\n      containers:\n        - name: user-db\n          image: weaveworksdemos/user-db:0.4.7\n          \n          ports:\n            - name: mongo\n              containerPort: 27017\n          securityContext:\n            capabilities:\n              drop:\n                - all\n              add:\n                - CHOWN\n                - SETGID\n                - SETUID\n            readOnlyRootFilesystem: true\n          volumeMounts:\n            - mountPath: /tmp\n              name: tmp-volume\n          readinessProbe:\n            exec:\n              command:\n                - sh\n                - -c\n                - mongo --eval \"db.runCommand('ping').ok\"\n            periodSeconds: 3 \n            failureThreshold: 2 \n            successThreshold: 1\n            timeoutSeconds: 1\n      volumes:\n        - name: tmp-volume\n          emptyDir:\n            medium: Memory\n      nodeSelector:\n        kubernetes.io/os: linux", Deploy:(*v1.Deployment)(0xc0003dea00)}, PodLabels:map[string]string(nil)}
+2024-02-06T08:50:23.654Z	INFO	k8s/k8s.go:338	被测服务 carts 不是数据库，不创建: micro.Microservice{ID:1, Name:"carts", ServiceBox:micro.ServiceBox{ServiceYaml:"apiVersion: v1\nkind: Service\nmetadata:\n  name: carts\n  annotations:\n    prometheus.io/scrape: 'true'\n  labels:\n    name: carts\n  namespace: sock-shop\nspec:\n  ports:\n    \n    - port: 80\n      targetPort: 80\n  selector:\n    name: carts", Service:(*v1.Service)(0xc0006c4780)}, DeployBox:micro.DeployBox{DeployYaml:"apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: carts\n  labels:\n    name: carts\n  namespace: sock-shop\nspec:\n  replicas: 1\n  selector:\n    matchLabels:\n      name: carts\n  template:\n    metadata:\n      labels:\n        name: carts\n    spec:\n      containers:\n        - name: carts\n          image: weaveworksdemos/carts:0.4.8\n          env:\n            - name: JAVA_OPTS\n              value: -Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false\n          resources:\n            limits:\n              cpu: 300m\n              memory: 500Mi\n            requests:\n              cpu: 100m\n              memory: 200Mi\n          ports:\n            - containerPort: 80\n          securityContext:\n            runAsNonRoot: true\n            runAsUser: 10001\n            capabilities:\n              drop:\n                - all\n              add:\n                - NET_BIND_SERVICE\n            readOnlyRootFilesystem: true\n          volumeMounts:\n            - mountPath: /tmp\n              name: tmp-volume\n          readinessProbe:\n            httpGet:\n              port: 80\n              path: /health\n            periodSeconds: 3 \n            failureThreshold: 2 \n            successThreshold: 1\n            timeoutSeconds: 1\n      volumes:\n        - name: tmp-volume\n          emptyDir:\n            medium: Memory\n      nodeSelector:\n        kubernetes.io/os: linux", Deploy:(*v1.Deployment)(0xc0006bea00)}, PodLabels:map[string]string(nil)}
+2024-02-06T08:50:23.655Z	INFO	k8s/k8s.go:346	创建数据库 Deploy carts-db
+2024-02-06T08:50:33.985Z	INFO	k8s/k8s.go:93	Deploy carts-db 就绪
+2024-02-06T08:50:33.986Z	INFO	k8s/k8s.go:353	创建数据库 Service carts-db
+2024-02-06T08:50:34.007Z	INFO	k8s/k8s.go:106	等待 Service carts-db 就绪
+2024-02-06T08:50:34.014Z	INFO	k8s/k8s.go:118	Service carts-db 就绪
+2024-02-06T08:50:34.014Z	INFO	k8s/k8s.go:338	被测服务 catalogue 不是数据库，不创建: micro.Microservice{ID:3, Name:"catalogue", ServiceBox:micro.ServiceBox{ServiceYaml:"apiVersion: v1\nkind: Service\nmetadata:\n  name: catalogue\n  annotations:\n    prometheus.io/scrape: 'true'\n  labels:\n    name: catalogue\n  namespace: sock-shop\nspec:\n  ports:\n    \n    - port: 80\n      targetPort: 80\n  selector:\n    name: catalogue", Service:(*v1.Service)(0xc0002b9400)}, DeployBox:micro.DeployBox{DeployYaml:"apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: catalogue\n  labels:\n    name: catalogue\n  namespace: sock-shop\nspec:\n  replicas: 1\n  selector:\n    matchLabels:\n      name: catalogue\n  template:\n    metadata:\n      labels:\n        name: catalogue\n    spec:\n      containers:\n        - name: catalogue\n          image: weaveworksdemos/catalogue:0.3.5\n          command: [ \"/app\" ]\n          args:\n            - -port=80\n          resources:\n            limits:\n              cpu: 200m\n              memory: 200Mi\n            requests:\n              cpu: 100m\n              memory: 100Mi\n          ports:\n            - containerPort: 80\n          securityContext:\n            runAsNonRoot: true\n            runAsUser: 10001\n            capabilities:\n              drop:\n                - all\n              add:\n                - NET_BIND_SERVICE\n            readOnlyRootFilesystem: true\n          livenessProbe:\n            httpGet:\n              path: /health\n              port: 80\n            initialDelaySeconds: 300\n            periodSeconds: 3\n          readinessProbe:\n            httpGet:\n              path: /health\n              port: 80\n            periodSeconds: 3 \n            failureThreshold: 2 \n            successThreshold: 1\n            timeoutSeconds: 1\n      nodeSelector:\n        kubernetes.io/os: linux", Deploy:(*v1.Deployment)(0xc0006bf900)}, PodLabels:map[string]string(nil)}
+2024-02-06T08:50:34.014Z	INFO	k8s/k8s.go:346	创建数据库 Deploy catalogue-db
+2024-02-06T08:51:07.801Z	INFO	k8s/k8s.go:93	Deploy catalogue-db 就绪
+2024-02-06T08:51:07.801Z	INFO	k8s/k8s.go:353	创建数据库 Service catalogue-db
+2024-02-06T08:51:07.824Z	INFO	k8s/k8s.go:106	等待 Service catalogue-db 就绪
+2024-02-06T08:51:07.829Z	INFO	k8s/k8s.go:118	Service catalogue-db 就绪
+2024-02-06T08:51:07.830Z	INFO	k8s/k8s.go:338	被测服务 front-end 不是数据库，不创建: micro.Microservice{ID:5, Name:"front-end", ServiceBox:micro.ServiceBox{ServiceYaml:"apiVersion: v1\nkind: Service\nmetadata:\n  name: front-end\n  annotations:\n    prometheus.io/scrape: 'true'\n  labels:\n    name: front-end\n  namespace: sock-shop\nspec:\n  type: NodePort\n  ports:\n    - port: 80\n      targetPort: 8079\n      nodePort: 30001\n  selector:\n    name: front-end", Service:(*v1.Service)(0xc0006c4f00)}, DeployBox:micro.DeployBox{DeployYaml:"apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: front-end\n  namespace: sock-shop\nspec:\n  replicas: 1\n  selector:\n    matchLabels:\n      name: front-end\n  template:\n    metadata:\n      labels:\n        name: front-end\n    spec:\n      containers:\n        - name: front-end\n          image: weaveworksdemos/front-end:0.3.12\n          resources:\n            limits:\n              cpu: 300m\n              memory: 1000Mi\n            requests:\n              cpu: 100m\n              memory: 300Mi\n          ports:\n            - containerPort: 8079\n          env:\n            - name: SESSION_REDIS\n              value: \"true\"\n          securityContext:\n            runAsNonRoot: true\n            runAsUser: 10001\n            capabilities:\n              drop:\n                - all\n            readOnlyRootFilesystem: true\n          livenessProbe:\n            httpGet:\n              path: /\n              port: 8079\n            initialDelaySeconds: 300\n            periodSeconds: 3\n          readinessProbe:\n            httpGet:\n              path: /\n              port: 8079\n            periodSeconds: 3 \n            failureThreshold: 2 \n            successThreshold: 1\n            timeoutSeconds: 1\n      nodeSelector:\n        kubernetes.io/os: linux", Deploy:(*v1.Deployment)(0xc0001c8f00)}, PodLabels:map[string]string(nil)}
+2024-02-06T08:51:07.830Z	INFO	k8s/k8s.go:338	被测服务 orders 不是数据库，不创建: micro.Microservice{ID:6, Name:"orders", ServiceBox:micro.ServiceBox{ServiceYaml:"apiVersion: v1\nkind: Service\nmetadata:\n  name: orders\n  annotations:\n    prometheus.io/scrape: 'true'\n  labels:\n    name: orders\n  namespace: sock-shop\nspec:\n  ports:\n    \n    - port: 80\n      targetPort: 80\n  selector:\n    name: orders", Service:(*v1.Service)(0xc0006c5680)}, DeployBox:micro.DeployBox{DeployYaml:"apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: orders\n  labels:\n    name: orders\n  namespace: sock-shop\nspec:\n  replicas: 1\n  selector:\n    matchLabels:\n      name: orders\n  template:\n    metadata:\n      labels:\n        name: orders\n    spec:\n      containers:\n        - name: orders\n          image: weaveworksdemos/orders:0.4.7\n          env:\n            - name: JAVA_OPTS\n              value: -Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false\n          resources:\n            limits:\n              cpu: 500m\n              memory: 500Mi\n            requests:\n              cpu: 100m\n              memory: 300Mi\n          ports:\n            - containerPort: 80\n          securityContext:\n            runAsNonRoot: true\n            runAsUser: 10001\n            capabilities:\n              drop:\n                - all\n              add:\n                - NET_BIND_SERVICE\n            readOnlyRootFilesystem: true\n          volumeMounts:\n            - mountPath: /tmp\n              name: tmp-volume\n          readinessProbe:\n            httpGet:\n              port: 80\n              path: /health\n            periodSeconds: 3 \n            failureThreshold: 2 \n            successThreshold: 1\n            timeoutSeconds: 1\n      volumes:\n        - name: tmp-volume\n          emptyDir:\n            medium: Memory\n      nodeSelector:\n        kubernetes.io/os: linux", Deploy:(*v1.Deployment)(0xc0001c9400)}, PodLabels:map[string]string(nil)}
+2024-02-06T08:51:07.830Z	INFO	k8s/k8s.go:346	创建数据库 Deploy orders-db
+2024-02-06T08:51:18.208Z	INFO	k8s/k8s.go:93	Deploy orders-db 就绪
+2024-02-06T08:51:18.208Z	INFO	k8s/k8s.go:353	创建数据库 Service orders-db
+2024-02-06T08:51:18.223Z	INFO	k8s/k8s.go:106	等待 Service orders-db 就绪
+2024-02-06T08:51:18.227Z	INFO	k8s/k8s.go:118	Service orders-db 就绪
+2024-02-06T08:51:18.227Z	INFO	k8s/k8s.go:338	被测服务 payment 不是数据库，不创建: micro.Microservice{ID:8, Name:"payment", ServiceBox:micro.ServiceBox{ServiceYaml:"apiVersion: v1\nkind: Service\nmetadata:\n  name: payment\n  annotations:\n    prometheus.io/scrape: 'true'\n  labels:\n    name: payment\n  namespace: sock-shop\nspec:\n  ports:\n    \n    - port: 80\n      targetPort: 80\n  selector:\n    name: payment", Service:(*v1.Service)(0xc0001df680)}, DeployBox:micro.DeployBox{DeployYaml:"apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: payment\n  labels:\n    name: payment\n  namespace: sock-shop\nspec:\n  replicas: 1\n  selector:\n    matchLabels:\n      name: payment\n  template:\n    metadata:\n      labels:\n        name: payment\n    spec:\n      containers:\n        - name: payment\n          image: weaveworksdemos/payment:0.4.3\n          resources:\n            limits:\n              cpu: 200m\n              memory: 200Mi\n            requests:\n              cpu: 99m\n              memory: 100Mi\n          ports:\n            - containerPort: 80\n          securityContext:\n            runAsNonRoot: true\n            runAsUser: 10001\n            capabilities:\n              drop:\n                - all\n              add:\n                - NET_BIND_SERVICE\n            readOnlyRootFilesystem: true\n          livenessProbe:\n            httpGet:\n              path: /health\n              port: 80\n            initialDelaySeconds: 300\n            periodSeconds: 3\n          readinessProbe:\n            httpGet:\n              path: /health\n              port: 80\n            periodSeconds: 3 \n            failureThreshold: 2 \n            successThreshold: 1\n            timeoutSeconds: 1\n      nodeSelector:\n        kubernetes.io/os: linux", Deploy:(*v1.Deployment)(0xc000135900)}, PodLabels:map[string]string(nil)}
+2024-02-06T08:51:18.227Z	INFO	k8s/k8s.go:338	被测服务 queue-master 不是数据库，不创建: micro.Microservice{ID:9, Name:"queue-master", ServiceBox:micro.ServiceBox{ServiceYaml:"apiVersion: v1\nkind: Service\nmetadata:\n  name: queue-master\n  annotations:\n    prometheus.io/scrape: 'true'\n  labels:\n    name: queue-master\n  namespace: sock-shop\nspec:\n  ports:\n    \n    - port: 80\n      targetPort: 80\n  selector:\n    name: queue-master", Service:(*v1.Service)(0xc0003ec280)}, DeployBox:micro.DeployBox{DeployYaml:"apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: queue-master\n  labels:\n    name: queue-master\n  namespace: sock-shop\nspec:\n  replicas: 1\n  selector:\n    matchLabels:\n      name: queue-master\n  template:\n    metadata:\n      labels:\n        name: queue-master\n    spec:\n      containers:\n        - name: queue-master\n          image: weaveworksdemos/queue-master:0.3.1\n          env:\n            - name: JAVA_OPTS\n              value: -Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false\n          resources:\n            limits:\n              cpu: 300m\n              memory: 500Mi\n            requests:\n              cpu: 100m\n              memory: 300Mi\n          ports:\n            - containerPort: 80\n          readinessProbe:\n            httpGet:\n              port: 80\n              path: /health\n            periodSeconds: 3 \n            failureThreshold: 2 \n            successThreshold: 1\n            timeoutSeconds: 1\n      nodeSelector:\n        kubernetes.io/os: linux", Deploy:(*v1.Deployment)(0xc000020500)}, PodLabels:map[string]string(nil)}
+2024-02-06T08:51:18.227Z	INFO	k8s/k8s.go:338	被测服务 rabbitmq 不是数据库，不创建: micro.Microservice{ID:10, Name:"rabbitmq", ServiceBox:micro.ServiceBox{ServiceYaml:"apiVersion: v1\nkind: Service\nmetadata:\n  name: rabbitmq\n  annotations:\n    prometheus.io/scrape: 'true'\n    prometheus.io/port: '9090'\n  labels:\n    name: rabbitmq\n  namespace: sock-shop\nspec:\n  ports:\n    \n    - port: 5672\n      name: rabbitmq\n      targetPort: 5672\n    - port: 9090\n      name: exporter\n      targetPort: exporter\n      protocol: TCP\n  selector:\n    name: rabbitmq", Service:(*v1.Service)(0xc0003eca00)}, DeployBox:micro.DeployBox{DeployYaml:"apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: rabbitmq\n  labels:\n    name: rabbitmq\n  namespace: sock-shop\nspec:\n  replicas: 1\n  selector:\n    matchLabels:\n      name: rabbitmq\n  template:\n    metadata:\n      labels:\n        name: rabbitmq\n      annotations:\n        prometheus.io/scrape: \"false\"\n    spec:\n      containers:\n        - name: rabbitmq\n          image: rabbitmq:3.6.8-management\n          ports:\n            - containerPort: 15672\n              name: management\n            - containerPort: 5672\n              name: rabbitmq\n          securityContext:\n            capabilities:\n              drop:\n                - all\n              add:\n                - CHOWN\n                - SETGID\n                - SETUID\n                - DAC_OVERRIDE\n            readOnlyRootFilesystem: true\n          readinessProbe:\n            tcpSocket:\n              port: 5672\n            periodSeconds: 3 \n            failureThreshold: 2 \n            successThreshold: 1\n            timeoutSeconds: 1\n        - name: rabbitmq-exporter\n          image: kbudde/rabbitmq-exporter\n          ports:\n            - containerPort: 9090\n              name: exporter\n          readinessProbe:\n            tcpSocket:\n              port: 9090\n            periodSeconds: 3 \n            failureThreshold: 2 \n            successThreshold: 1\n            timeoutSeconds: 1\n      nodeSelector:\n        kubernetes.io/os: linux", Deploy:(*v1.Deployment)(0xc0001d8a00)}, PodLabels:map[string]string(nil)}
+2024-02-06T08:51:18.228Z	INFO	k8s/k8s.go:346	创建数据库 Deploy session-db
+2024-02-06T08:51:21.379Z	INFO	k8s/k8s.go:93	Deploy session-db 就绪
+2024-02-06T08:51:21.379Z	INFO	k8s/k8s.go:353	创建数据库 Service session-db
+2024-02-06T08:51:21.396Z	INFO	k8s/k8s.go:106	等待 Service session-db 就绪
+2024-02-06T08:51:21.404Z	INFO	k8s/k8s.go:118	Service session-db 就绪
+2024-02-06T08:51:21.405Z	INFO	k8s/k8s.go:338	被测服务 shipping 不是数据库，不创建: micro.Microservice{ID:12, Name:"shipping", ServiceBox:micro.ServiceBox{ServiceYaml:"apiVersion: v1\nkind: Service\nmetadata:\n  name: shipping\n  annotations:\n    prometheus.io/scrape: 'true'\n  labels:\n    name: shipping\n  namespace: sock-shop\nspec:\n  ports:\n    \n    - port: 80\n      targetPort: 80\n  selector:\n    name: shipping", Service:(*v1.Service)(0xc0004ba500)}, DeployBox:micro.DeployBox{DeployYaml:"apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: shipping\n  labels:\n    name: shipping\n  namespace: sock-shop\nspec:\n  replicas: 1\n  selector:\n    matchLabels:\n      name: shipping\n  template:\n    metadata:\n      labels:\n        name: shipping\n    spec:\n      containers:\n        - name: shipping\n          image: weaveworksdemos/shipping:0.4.8\n          env:\n            - name: ZIPKIN\n              value: zipkin.jaeger.svc.cluster.local\n            - name: JAVA_OPTS\n              value: -Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false\n          resources:\n            limits:\n              cpu: 300m\n              memory: 500Mi\n            requests:\n              cpu: 100m\n              memory: 300Mi\n          ports:\n            - containerPort: 80\n          securityContext:\n            runAsNonRoot: true\n            runAsUser: 10001\n            capabilities:\n              drop:\n                - all\n              add:\n                - NET_BIND_SERVICE\n            readOnlyRootFilesystem: true\n          volumeMounts:\n            - mountPath: /tmp\n              name: tmp-volume\n          readinessProbe:\n            httpGet:\n              port: 80\n              path: /health\n            periodSeconds: 3 \n            failureThreshold: 2 \n            successThreshold: 1\n            timeoutSeconds: 1\n      volumes:\n        - name: tmp-volume\n          emptyDir:\n            medium: Memory\n      nodeSelector:\n        kubernetes.io/os: linux", Deploy:(*v1.Deployment)(0xc0001d9400)}, PodLabels:map[string]string(nil)}
+2024-02-06T08:51:21.405Z	INFO	k8s/k8s.go:338	被测服务 user 不是数据库，不创建: micro.Microservice{ID:13, Name:"user", ServiceBox:micro.ServiceBox{ServiceYaml:"apiVersion: v1\nkind: Service\nmetadata:\n  name: user\n  annotations:\n    prometheus.io/scrape: 'true'\n  labels:\n    name: user\n  namespace: sock-shop\nspec:\n  ports:\n    \n    - port: 80\n      targetPort: 80\n  selector:\n    name: user", Service:(*v1.Service)(0xc000523900)}, DeployBox:micro.DeployBox{DeployYaml:"apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: user\n  labels:\n    name: user\n  namespace: sock-shop\nspec:\n  replicas: 1\n  selector:\n    matchLabels:\n      name: user\n  template:\n    metadata:\n      labels:\n        name: user\n    spec:\n      containers:\n        - name: user\n          image: weaveworksdemos/user:0.4.7\n          resources:\n            limits:\n              cpu: 300m\n              memory: 200Mi\n            requests:\n              cpu: 100m\n              memory: 100Mi\n          ports:\n            - containerPort: 80\n          env:\n            - name: mongo\n              value: user-db:27017\n          securityContext:\n            runAsNonRoot: true\n            runAsUser: 10001\n            capabilities:\n              drop:\n                - all\n              add:\n                - NET_BIND_SERVICE\n            readOnlyRootFilesystem: true\n          livenessProbe:\n            httpGet:\n              path: /health\n              port: 80\n            initialDelaySeconds: 300\n            periodSeconds: 3\n          readinessProbe:\n            httpGet:\n              path: /health\n              port: 80\n            periodSeconds: 3 \n            failureThreshold: 2 \n            successThreshold: 1\n            timeoutSeconds: 1\n      nodeSelector:\n        kubernetes.io/os: linux", Deploy:(*v1.Deployment)(0xc0003de000)}, PodLabels:map[string]string(nil)}
+2024-02-06T08:51:21.405Z	INFO	k8s/k8s.go:346	创建数据库 Deploy user-db
+2024-02-06T08:51:55.787Z	INFO	k8s/k8s.go:93	Deploy user-db 就绪
+2024-02-06T08:51:55.788Z	INFO	k8s/k8s.go:353	创建数据库 Service user-db
+2024-02-06T08:51:55.809Z	INFO	k8s/k8s.go:106	等待 Service user-db 就绪
+2024-02-06T08:51:55.814Z	INFO	k8s/k8s.go:118	Service user-db 就绪
+2024-02-06T08:51:55.814Z	DEBUG	routine/micro.go:59	TestMicroservice.CreateRoutine: 微服务 carts 创建测试协程 1
+2024-02-06T08:51:55.814Z	DEBUG	routine/micro.go:59	TestMicroservice.CreateRoutine: 微服务 carts-db 创建测试协程 1
+2024-02-06T08:51:55.814Z	DEBUG	routine/micro.go:59	TestMicroservice.CreateRoutine: 微服务 catalogue 创建测试协程 1
+2024-02-06T08:51:55.814Z	DEBUG	routine/micro.go:59	TestMicroservice.CreateRoutine: 微服务 catalogue-db 创建测试协程 1
+2024-02-06T08:51:55.814Z	DEBUG	routine/micro.go:59	TestMicroservice.CreateRoutine: 微服务 front-end 创建测试协程 1
+2024-02-06T08:51:55.814Z	DEBUG	routine/micro.go:59	TestMicroservice.CreateRoutine: 微服务 orders 创建测试协程 1
+2024-02-06T08:51:55.814Z	DEBUG	routine/micro.go:59	TestMicroservice.CreateRoutine: 微服务 orders-db 创建测试协程 1
+2024-02-06T08:51:55.814Z	DEBUG	routine/micro.go:59	TestMicroservice.CreateRoutine: 微服务 payment 创建测试协程 1
+2024-02-06T08:51:55.815Z	DEBUG	routine/micro.go:59	TestMicroservice.CreateRoutine: 微服务 queue-master 创建测试协程 1
+2024-02-06T08:51:55.815Z	DEBUG	routine/micro.go:59	TestMicroservice.CreateRoutine: 微服务 rabbitmq 创建测试协程 1
+2024-02-06T08:51:55.815Z	DEBUG	routine/micro.go:59	TestMicroservice.CreateRoutine: 微服务 session-db 创建测试协程 1
+2024-02-06T08:51:55.815Z	DEBUG	routine/micro.go:59	TestMicroservice.CreateRoutine: 微服务 shipping 创建测试协程 1
+2024-02-06T08:51:55.815Z	DEBUG	routine/micro.go:59	TestMicroservice.CreateRoutine: 微服务 user 创建测试协程 1
+2024-02-06T08:51:55.815Z	DEBUG	routine/micro.go:59	TestMicroservice.CreateRoutine: 微服务 user-db 创建测试协程 1
+2024-02-06T08:51:55.815Z	INFO	proxy/proxy.go:226	将创建 HTTP1 数据服务 端口: 80
+2024-02-06T08:51:55.816Z	INFO	proxy/proxy.go:226	将创建 HTTP1 数据服务 端口: 3306
+2024-02-06T08:51:55.816Z	INFO	proxy/proxy.go:226	将创建 HTTP1 数据服务 端口: 5672
+2024-02-06T08:51:55.816Z	INFO	proxy/proxy.go:226	将创建 HTTP1 数据服务 端口: 6379
+2024-02-06T08:51:55.817Z	INFO	proxy/proxy.go:226	将创建 HTTP1 数据服务 端口: 8079
+2024-02-06T08:51:55.817Z	INFO	proxy/proxy.go:226	将创建 HTTP1 数据服务 端口: 9090
+2024-02-06T08:51:55.817Z	INFO	proxy/proxy.go:226	将创建 HTTP1 数据服务 端口: 27017
+2024-02-06T08:51:56.819Z	INFO	admin/controllers.go:137	开始时间 2024-02-06T08:51:56.819688923Z
+2024-02-06T08:51:56.820Z	INFO	routine/task_main.go:24	测试 5(front-end) 请求 /tags: 当前完整请求 Method 'GET' Path '/tags' len(body) = 0 body = ''
+2024-02-06T08:51:56.820Z	INFO	routine/task_main.go:39	测试 5(front-end) 请求 /tags: 生成无故障测试用例
+2024-02-06T08:51:56.820Z	DEBUG	routine/task_sub.go:14	GenerateSub: 没有已知依赖的初始请求 front-end
+2024-02-06T08:51:56.838Z	DEBUG	routine/micro.go:75	TestMicroservice.AddExecuteContext front-end 加入队列 测试执行上下文： executeContext 
+<测试执行上下文> 开始微服务 5(front-end)
+直接被测微服务故障 MicroserviceChaos{Microservice: 5(front-end), Chaos: Chaos{ Index: -1, ProxyFault: 0(normal) }}
+
+
+下游响应组合: 
+
+下游响应组合详情:
+
+
+调用栈:
+goroutine 211 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:24 +0x65
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.(*ExecuteContext).toString(0xc000b37da0)
+	/root/chaos-mesh/pkg/proxy/test/routine/routine.go:76 +0x8b7
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.(*TestMicroservice).AddExecuteContext(0xc0001b69b0, {0xc0001b69b0, 0xc00028d820, 0xc0005beb40, 0x0, 0xc0003e8480})
+	/root/chaos-mesh/pkg/proxy/test/routine/micro.go:76 +0x1ff
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.GenerateSub({0xc0001b69b0?, 0xc00028d820?, 0xc0005beb40?, 0x0?}, 0xc0003e8480)
+	/root/chaos-mesh/pkg/proxy/test/routine/task_sub.go:25 +0x45b
+created by github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.runGenerateSub
+	/root/chaos-mesh/pkg/proxy/test/routine/task_main.go:94 +0x185
+<测试执行上下文> 结束
+2024-02-06T08:51:56.843Z	DEBUG	routine/task_sub.go:27	GenerateSub: 没有已知依赖的初始请求 front-end 完成
+2024-02-06T08:52:03.728Z	INFO	k8s/k8s.go:93	Deploy a-payment-1 就绪
+2024-02-06T08:52:03.756Z	INFO	k8s/k8s.go:106	等待 Service a-payment-1 就绪
+2024-02-06T08:52:03.809Z	INFO	k8s/k8s.go:118	Service a-payment-1 就绪
+2024-02-06T08:52:03.810Z	DEBUG	routine/routine.go:107	Execute microservice payment 执行 测试协程 1 初始化完成 routine.TestRoutine{RoutineID:1, AliasName:"a-payment-1", AliasPodLabels:map[string]string{"app":"a-payment-1"}, AliasDeploy:(*v1.Deployment)(0xc0005b4a00), AliasService:(*v1.Service)(0xc000926280)}
+2024-02-06T08:52:03.857Z	INFO	k8s/k8s.go:93	Deploy a-catalogue-1 就绪
+2024-02-06T08:52:03.891Z	INFO	k8s/k8s.go:106	等待 Service a-catalogue-1 就绪
+2024-02-06T08:52:03.915Z	INFO	k8s/k8s.go:118	Service a-catalogue-1 就绪
+2024-02-06T08:52:03.916Z	DEBUG	routine/routine.go:107	Execute microservice catalogue 执行 测试协程 1 初始化完成 routine.TestRoutine{RoutineID:1, AliasName:"a-catalogue-1", AliasPodLabels:map[string]string{"app":"a-catalogue-1"}, AliasDeploy:(*v1.Deployment)(0xc0003faa00), AliasService:(*v1.Service)(0xc000980780)}
+2024-02-06T08:52:05.792Z	INFO	k8s/k8s.go:93	Deploy a-session-db-1 就绪
+2024-02-06T08:52:05.827Z	INFO	k8s/k8s.go:106	等待 Service a-session-db-1 就绪
+2024-02-06T08:52:05.832Z	INFO	k8s/k8s.go:118	Service a-session-db-1 就绪
+2024-02-06T08:52:05.832Z	DEBUG	routine/routine.go:107	Execute microservice session-db 执行 测试协程 1 初始化完成 routine.TestRoutine{RoutineID:1, AliasName:"a-session-db-1", AliasPodLabels:map[string]string{"app":"a-session-db-1"}, AliasDeploy:(*v1.Deployment)(0xc0005b4000), AliasService:(*v1.Service)(0xc000ae3b80)}
+2024-02-06T08:52:11.785Z	INFO	k8s/k8s.go:93	Deploy a-front-end-1 就绪
+2024-02-06T08:52:11.827Z	INFO	k8s/k8s.go:106	等待 Service a-front-end-1 就绪
+2024-02-06T08:52:11.831Z	INFO	k8s/k8s.go:118	Service a-front-end-1 就绪
+2024-02-06T08:52:11.831Z	DEBUG	routine/routine.go:107	Execute microservice front-end 执行 测试协程 1 初始化完成 routine.TestRoutine{RoutineID:1, AliasName:"a-front-end-1", AliasPodLabels:map[string]string{"app":"a-front-end-1"}, AliasDeploy:(*v1.Deployment)(0xc0003fa000), AliasService:(*v1.Service)(0xc000981680)}
+2024-02-06T08:52:11.831Z	DEBUG	routine/routine.go:111	Execute microservice front-end 执行 测试执行上下文： executeContext 
+<测试执行上下文> 开始微服务 5(front-end)
+直接被测微服务故障 MicroserviceChaos{Microservice: 5(front-end), Chaos: Chaos{ Index: -1, ProxyFault: 0(normal) }}
+
+
+下游响应组合: 
+
+下游响应组合详情:
+
+
+调用栈:
+goroutine 127 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:24 +0x65
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.(*ExecuteContext).toString(0xc00072fec8)
+	/root/chaos-mesh/pkg/proxy/test/routine/routine.go:76 +0x8b7
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.Execute(0xc0001b6960, 0x1, 0x0?)
+	/root/chaos-mesh/pkg/proxy/test/routine/routine.go:112 +0x4c5
+created by github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.(*TestMicroservice).CreateRoutine
+	/root/chaos-mesh/pkg/proxy/test/routine/micro.go:60 +0x165
+<测试执行上下文> 结束
+2024-02-06T08:52:11.831Z	INFO	routine/routine.go:153	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) }: 开始
+2024-02-06T08:52:11.831Z	DEBUG	routine/routine.go:227	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) }: 当前故障种类适用于当前被测 Pod
+2024-02-06T08:52:11.831Z	INFO	routine/routine.go:309	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) } 第 1 次: 开始
+2024-02-06T08:52:11.865Z	DEBUG	routine/manager.go:28	SetResponseBehavior a-front-end-1
+2024-02-06T08:52:11.866Z	INFO	routine/routine.go:334	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) } 第 1 次: 初始时无故障
+2024-02-06T08:52:11.866Z	INFO	k8s/k8s.go:243	等待微服务 a-front-end-1 就绪
+2024-02-06T08:52:11.884Z	INFO	k8s/k8s.go:267	微服务 a-front-end-1 就绪 历时 18.45724ms
+2024-02-06T08:52:11.893Z	DEBUG	k8s/k8s.go:572	请求 http://a-front-end-1:80/
+2024-02-06T08:52:15.115Z	INFO	k8s/k8s.go:93	Deploy a-carts-db-1 就绪
+2024-02-06T08:52:15.134Z	INFO	k8s/k8s.go:106	等待 Service a-carts-db-1 就绪
+2024-02-06T08:52:15.163Z	INFO	k8s/k8s.go:118	Service a-carts-db-1 就绪
+2024-02-06T08:52:15.164Z	DEBUG	routine/routine.go:107	Execute microservice carts-db 执行 测试协程 1 初始化完成 routine.TestRoutine{RoutineID:1, AliasName:"a-carts-db-1", AliasPodLabels:map[string]string{"app":"a-carts-db-1"}, AliasDeploy:(*v1.Deployment)(0xc0000c8500), AliasService:(*v1.Service)(0xc000a08500)}
+2024-02-06T08:52:25.704Z	INFO	k8s/k8s.go:93	Deploy a-orders-db-1 就绪
+2024-02-06T08:52:25.720Z	INFO	k8s/k8s.go:106	等待 Service a-orders-db-1 就绪
+2024-02-06T08:52:25.724Z	INFO	k8s/k8s.go:118	Service a-orders-db-1 就绪
+2024-02-06T08:52:25.724Z	DEBUG	routine/routine.go:107	Execute microservice orders-db 执行 测试协程 1 初始化完成 routine.TestRoutine{RoutineID:1, AliasName:"a-orders-db-1", AliasPodLabels:map[string]string{"app":"a-orders-db-1"}, AliasDeploy:(*v1.Deployment)(0xc000297900), AliasService:(*v1.Service)(0xc000a08f00)}
+2024-02-06T08:52:39.675Z	INFO	k8s/k8s.go:93	Deploy a-user-1 就绪
+2024-02-06T08:52:39.730Z	INFO	k8s/k8s.go:106	等待 Service a-user-1 就绪
+2024-02-06T08:52:39.736Z	INFO	k8s/k8s.go:118	Service a-user-1 就绪
+2024-02-06T08:52:39.737Z	DEBUG	routine/routine.go:107	Execute microservice user 执行 测试协程 1 初始化完成 routine.TestRoutine{RoutineID:1, AliasName:"a-user-1", AliasPodLabels:map[string]string{"app":"a-user-1"}, AliasDeploy:(*v1.Deployment)(0xc0005c0a00), AliasService:(*v1.Service)(0xc000927400)}
+2024-02-06T08:52:41.895Z	WARN	k8s/k8s.go:575	请求错误: Get "http://a-front-end-1:80/": dial tcp 10.101.52.229:80: i/o timeout
+2024-02-06T08:52:42.896Z	DEBUG	k8s/k8s.go:572	请求 http://a-front-end-1:80/
+2024-02-06T08:52:42.926Z	INFO	k8s/k8s.go:585	通过服务名 a-front-end-1 可以请求微服务 a-front-end-1
+2024-02-06T08:52:43.187Z	DEBUG	monitor/monitor.go:153	等待 container_fs_writes_bytes_total test-front-end a-front-end-1-55c8fc96f8-vz85n  直到 2024-02-06 08:52:31.831 +0000 UTC 1707209531831，睡眠 -11.356199094s
+2024-02-06T08:52:44.425Z	DEBUG	monitor/monitor.go:167	获取 cAdvisor 指标 container_fs_writes_bytes_total test-front-end a-front-end-1-55c8fc96f8-vz85n  成功：0.000000 1707209552492
+2024-02-06T08:52:44.425Z	DEBUG	monitor/monitor.go:153	等待 container_fs_reads_bytes_total test-front-end a-front-end-1-55c8fc96f8-vz85n  直到 2024-02-06 08:52:31.831 +0000 UTC 1707209531831，睡眠 -12.594472801s
+2024-02-06T08:52:45.142Z	DEBUG	monitor/monitor.go:167	获取 cAdvisor 指标 container_fs_reads_bytes_total test-front-end a-front-end-1-55c8fc96f8-vz85n  成功：11628544.000000 1707209552492
+2024-02-06T08:52:45.142Z	DEBUG	routine/routine.go:379	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) } 第 1 次: 初始使用情况: container_fs_writes_bytes_total 0.000000 1707209552492 2024-02-06T08:52:32.492Z
+2024-02-06T08:52:45.142Z	DEBUG	routine/routine.go:418	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) } 第 1 次: 无除DNS以外的故障
+2024-02-06T08:52:45.231Z	DEBUG	routine/micro.go:145	doTestRequest a-front-end-1: 第 1 次 发送请求 http://a-front-end-1:80/tags
+2024-02-06T08:52:45.354Z	DEBUG	proxy/proxy.go:115	serverHttp 192.168.215.199:43778 -> catalogue Begin
+2024-02-06T08:52:45.354Z	DEBUG	proxy/proxy.go:78	请求来源微服务 a-front-end-1
+2024-02-06T08:52:45.354Z	DEBUG	proxy/proxy.go:119	serverHttp 192.168.215.199:43778 -> catalogue fromName
+2024-02-06T08:52:45.354Z	DEBUG	proxy/proxy.go:54	请求目标微服务 catalogue 端口 80
+2024-02-06T08:52:45.355Z	DEBUG	proxy/proxy.go:122	serverHttp 192.168.215.199:43778 -> catalogue toMicroservice
+2024-02-06T08:52:45.355Z	INFO	proxy/proxy.go:128	请求 from a-front-end-1 to 3 catalogue fullURI: 'http://catalogue:80/tags'
+2024-02-06T08:52:45.355Z	DEBUG	routine/manager.go:18	GetBehavior a-front-end-1
+2024-02-06T08:52:45.355Z	DEBUG	routine/behavior.go:44	cursor 0 len 0
+2024-02-06T08:52:45.355Z	WARN	routine/behavior.go:88	创建任务时，任务未完成 http://catalogue:80/tags
+2024-02-06T08:52:45.356Z	INFO	proxy/proxy.go:156	请求 from a-front-end-1 to 3 catalogue fullURI: 'http://catalogue:80/tags': 响应不存在,新任务已创建
+2024-02-06T08:52:45.356Z	DEBUG	proxy/proxy.go:157	serverHttp 192.168.215.199:43778 -> catalogue End
+2024-02-06T08:52:45.355Z	INFO	routine/task_main.go:24	测试 3(catalogue) 请求 /tags: 当前完整请求 Method 'GET' Path '/tags' len(body) = 0 body = ''
+2024-02-06T08:52:45.365Z	INFO	routine/task_main.go:39	测试 3(catalogue) 请求 /tags: 生成无故障测试用例
+2024-02-06T08:52:45.371Z	DEBUG	routine/task_sub.go:14	GenerateSub: 没有已知依赖的初始请求 catalogue
+2024-02-06T08:52:45.378Z	DEBUG	routine/micro.go:75	TestMicroservice.AddExecuteContext catalogue 加入队列 测试执行上下文： executeContext 
+<测试执行上下文> 开始微服务 3(catalogue)
+直接被测微服务故障 MicroserviceChaos{Microservice: 3(catalogue), Chaos: Chaos{ Index: -1, ProxyFault: 0(normal) }}
+
+
+下游响应组合: 
+
+下游响应组合详情:
+
+
+调用栈:
+goroutine 251 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:24 +0x65
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.(*ExecuteContext).toString(0xc000711da0)
+	/root/chaos-mesh/pkg/proxy/test/routine/routine.go:76 +0x8b7
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.(*TestMicroservice).AddExecuteContext(0xc0001b67d0, {0xc0001b67d0, 0xc000574560, 0xc00056e4c0, 0x0, 0xc0006383c0})
+	/root/chaos-mesh/pkg/proxy/test/routine/micro.go:76 +0x1ff
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.GenerateSub({0xc0001b67d0?, 0xc000574560?, 0xc00056e4c0?, 0x0?}, 0xc0006383c0)
+	/root/chaos-mesh/pkg/proxy/test/routine/task_sub.go:25 +0x45b
+created by github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.runGenerateSub
+	/root/chaos-mesh/pkg/proxy/test/routine/task_main.go:94 +0x185
+<测试执行上下文> 结束
+2024-02-06T08:52:45.378Z	DEBUG	routine/task_sub.go:27	GenerateSub: 没有已知依赖的初始请求 catalogue 完成
+2024-02-06T08:52:45.379Z	DEBUG	routine/routine.go:111	Execute microservice catalogue 执行 测试执行上下文： executeContext 
+<测试执行上下文> 开始微服务 3(catalogue)
+直接被测微服务故障 MicroserviceChaos{Microservice: 3(catalogue), Chaos: Chaos{ Index: -1, ProxyFault: 0(normal) }}
+
+
+下游响应组合: 
+
+下游响应组合详情:
+
+
+调用栈:
+goroutine 123 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:24 +0x65
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.(*ExecuteContext).toString(0xc000711ec8)
+	/root/chaos-mesh/pkg/proxy/test/routine/routine.go:76 +0x8b7
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.Execute(0xc0001b6780, 0x1, 0x0?)
+	/root/chaos-mesh/pkg/proxy/test/routine/routine.go:112 +0x4c5
+created by github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.(*TestMicroservice).CreateRoutine
+	/root/chaos-mesh/pkg/proxy/test/routine/micro.go:60 +0x165
+<测试执行上下文> 结束
+2024-02-06T08:52:45.379Z	INFO	routine/routine.go:153	测试 catalogue(a-catalogue-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) }: 开始
+2024-02-06T08:52:45.379Z	DEBUG	routine/routine.go:227	测试 catalogue(a-catalogue-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) }: 当前故障种类适用于当前被测 Pod
+2024-02-06T08:52:45.379Z	INFO	routine/routine.go:309	测试 catalogue(a-catalogue-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) } 第 1 次: 开始
+2024-02-06T08:52:45.380Z	INFO	routine/routine.go:519	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) } 第 1 次: 响应内容: StatusCode '200' Header 'map[Date:[Tue, 06 Feb 2024 08:52:45 GMT] Set-Cookie:[md.sid=s%3A42tR_fF149mN8FBUAr_5YNLe5vUzo7AA.6RyrEkYmol54%2FnyhXfFTQQHGSXbRF12%2Bz%2FocwM9xrgc; Path=/; HttpOnly] X-Powered-By:[Express]]' len(body) = 0 body ''
+2024-02-06T08:52:45.396Z	DEBUG	routine/manager.go:28	SetResponseBehavior a-catalogue-1
+2024-02-06T08:52:45.396Z	INFO	routine/routine.go:334	测试 catalogue(a-catalogue-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) } 第 1 次: 初始时无故障
+2024-02-06T08:52:45.397Z	INFO	k8s/k8s.go:243	等待微服务 a-catalogue-1 就绪
+2024-02-06T08:52:45.406Z	INFO	k8s/k8s.go:267	微服务 a-catalogue-1 就绪 历时 9.169807ms
+2024-02-06T08:52:45.412Z	DEBUG	k8s/k8s.go:572	请求 http://a-catalogue-1:80/health
+2024-02-06T08:52:45.416Z	INFO	k8s/k8s.go:585	通过服务名 a-catalogue-1 可以请求微服务 a-catalogue-1
+2024-02-06T08:52:45.493Z	DEBUG	routine/routine.go:401	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) } 第 1 次: 无需从故障中恢复
+2024-02-06T08:52:45.494Z	DEBUG	routine/manager.go:43	ClearResponseBehavior a-front-end-1
+2024-02-06T08:52:45.494Z	INFO	routine/routine.go:653	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) } 第 1 次: 完成
+2024-02-06T08:52:45.494Z	INFO	routine/routine.go:292	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) }: 结束
+2024-02-06T08:52:45.494Z	DEBUG	routine/routine.go:544	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) } 第 1 次: 存在新发现未完成任务 总任务 1 新任务 1 枚举位置 -1
+2024-02-06T08:52:45.993Z	DEBUG	monitor/monitor.go:153	等待 container_fs_writes_bytes_total test-front-end a-catalogue-1-54fccd88bf-8rv27  直到 2024-02-06 08:53:05.379 +0000 UTC 1707209565379，睡眠 19.385567383s
+2024-02-06T08:52:51.008Z	INFO	k8s/k8s.go:93	Deploy a-catalogue-db-1 就绪
+2024-02-06T08:52:51.024Z	INFO	k8s/k8s.go:106	等待 Service a-catalogue-db-1 就绪
+2024-02-06T08:52:51.033Z	INFO	k8s/k8s.go:118	Service a-catalogue-db-1 就绪
+2024-02-06T08:52:51.034Z	DEBUG	routine/routine.go:107	Execute microservice catalogue-db 执行 测试协程 1 初始化完成 routine.TestRoutine{RoutineID:1, AliasName:"a-catalogue-db-1", AliasPodLabels:map[string]string{"app":"a-catalogue-db-1"}, AliasDeploy:(*v1.Deployment)(0xc0003fb400), AliasService:(*v1.Service)(0xc000a09680)}
+2024-02-06T08:53:05.781Z	DEBUG	monitor/monitor.go:167	获取 cAdvisor 指标 container_fs_writes_bytes_total test-front-end a-catalogue-1-54fccd88bf-8rv27  成功：0.000000 1707209577738
+2024-02-06T08:53:05.781Z	DEBUG	monitor/monitor.go:153	等待 container_fs_reads_bytes_total test-front-end a-catalogue-1-54fccd88bf-8rv27  直到 2024-02-06 08:53:05.379 +0000 UTC 1707209565379，睡眠 -402.552926ms
+2024-02-06T08:53:06.187Z	DEBUG	monitor/monitor.go:167	获取 cAdvisor 指标 container_fs_reads_bytes_total test-front-end a-catalogue-1-54fccd88bf-8rv27  成功：323584.000000 1707209577738
+2024-02-06T08:53:06.187Z	DEBUG	routine/routine.go:379	测试 catalogue(a-catalogue-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) } 第 1 次: 初始使用情况: container_fs_writes_bytes_total 0.000000 1707209577738 2024-02-06T08:52:57.738Z
+2024-02-06T08:53:06.187Z	DEBUG	routine/routine.go:418	测试 catalogue(a-catalogue-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) } 第 1 次: 无除DNS以外的故障
+2024-02-06T08:53:06.224Z	DEBUG	routine/micro.go:145	doTestRequest a-catalogue-1: 第 1 次 发送请求 http://a-catalogue-1:80/tags
+2024-02-06T08:53:06.459Z	INFO	routine/routine.go:519	测试 catalogue(a-catalogue-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) } 第 1 次: 响应内容: StatusCode '200' Header 'map[Content-Length:[107] Content-Type:[application/json; charset=utf-8] Date:[Tue, 06 Feb 2024 08:53:06 GMT]]' len(body) = 107 body '{"tags":["brown","geek","formal","blue","skin","red","action","sport","black","magic","green"],"err":null}
+'
+2024-02-06T08:53:06.517Z	DEBUG	routine/routine.go:401	测试 catalogue(a-catalogue-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) } 第 1 次: 无需从故障中恢复
+2024-02-06T08:53:06.518Z	DEBUG	routine/manager.go:43	ClearResponseBehavior a-catalogue-1
+2024-02-06T08:53:06.518Z	INFO	routine/routine.go:653	测试 catalogue(a-catalogue-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) } 第 1 次: 完成
+2024-02-06T08:53:06.517Z	DEBUG	routine/routine.go:572	测试 catalogue(a-catalogue-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) } 第 1 次: 不存在新发现未完成任务 总任务 0 枚举位置 -1
+2024-02-06T08:53:06.518Z	INFO	routine/routine.go:292	测试 catalogue(a-catalogue-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) }: 结束
+2024-02-06T08:53:06.525Z	DEBUG	monitor/monitor.go:153	等待 container_fs_writes_bytes_total test-front-end a-catalogue-1-54fccd88bf-8rv27  直到 2024-02-06 08:53:26.517 +0000 UTC 1707209586517，睡眠 19.991468667s
+2024-02-06T08:53:26.989Z	DEBUG	monitor/monitor.go:167	获取 cAdvisor 指标 container_fs_writes_bytes_total test-front-end a-catalogue-1-54fccd88bf-8rv27  成功：0.000000 1707209605986
+2024-02-06T08:53:26.990Z	DEBUG	monitor/monitor.go:153	等待 container_fs_reads_bytes_total test-front-end a-catalogue-1-54fccd88bf-8rv27  直到 2024-02-06 08:53:26.517 +0000 UTC 1707209586517，睡眠 -472.989978ms
+2024-02-06T08:53:27.434Z	DEBUG	monitor/monitor.go:167	获取 cAdvisor 指标 container_fs_reads_bytes_total test-front-end a-catalogue-1-54fccd88bf-8rv27  成功：323584.000000 1707209605986
+2024-02-06T08:53:27.434Z	WARN	routine/routine.go:592	测试 catalogue(a-catalogue-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) } 第 1 次: 未使用的系统资源: container_fs_writes_bytes_total 0.000000 1707209577738-1707209605986 2024-02-06T08:52:57.738Z-2024-02-06T08:53:25.986Z
+2024-02-06T08:53:27.434Z	WARN	routine/routine.go:600	测试 catalogue(a-catalogue-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) } 第 1 次: 未使用的系统资源: container_fs_reads_bytes_total 323584.000000 1707209577738-1707209605986 2024-02-06T08:52:57.738Z-2024-02-06T08:53:25.986Z
+2024-02-06T08:53:27.434Z	WARN	routine/routine.go:609	测试 catalogue(a-catalogue-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) } 第 1 次: 无需注入 IO 故障
+2024-02-06T08:53:27.434Z	INFO	routine/task_main.go:54	测试 3(catalogue) 请求 /tags: 跳过故障 0 normal
+2024-02-06T08:53:27.434Z	DEBUG	routine/task_sub.go:14	GenerateSub: 没有已知依赖的初始请求 catalogue
+2024-02-06T08:53:27.434Z	DEBUG	routine/micro.go:75	TestMicroservice.AddExecuteContext catalogue 加入队列 测试执行上下文： executeContext 
+<测试执行上下文> 开始微服务 3(catalogue)
+直接被测微服务故障 MicroserviceChaos{Microservice: 3(catalogue), Chaos: Chaos{ Index: 2, ProxyFault: 18(code-404) }}
+
+
+下游响应组合: 
+
+下游响应组合详情:
+
+
+调用栈:
+goroutine 287 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:24 +0x65
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.(*ExecuteContext).toString(0xc0000d9da0)
+	/root/chaos-mesh/pkg/proxy/test/routine/routine.go:76 +0x8b7
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.(*TestMicroservice).AddExecuteContext(0xc0001b67d0, {0xc0001b67d0, 0xc000574560, 0xc00056e240, 0x0, 0xc000c3a060})
+	/root/chaos-mesh/pkg/proxy/test/routine/micro.go:76 +0x1ff
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.GenerateSub({0xc0001b67d0?, 0xc000574560?, 0xc00056e240?, 0x0?}, 0xc000c3a060)
+	/root/chaos-mesh/pkg/proxy/test/routine/task_sub.go:25 +0x45b
+created by github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.runGenerateSub
+	/root/chaos-mesh/pkg/proxy/test/routine/task_main.go:94 +0x185
+<测试执行上下文> 结束
+2024-02-06T08:53:27.434Z	DEBUG	routine/task_sub.go:27	GenerateSub: 没有已知依赖的初始请求 catalogue 完成
+2024-02-06T08:53:27.434Z	DEBUG	routine/routine.go:111	Execute microservice catalogue 执行 测试执行上下文： executeContext 
+<测试执行上下文> 开始微服务 3(catalogue)
+直接被测微服务故障 MicroserviceChaos{Microservice: 3(catalogue), Chaos: Chaos{ Index: 2, ProxyFault: 18(code-404) }}
+
+
+下游响应组合: 
+
+下游响应组合详情:
+
+
+调用栈:
+goroutine 123 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:24 +0x65
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.(*ExecuteContext).toString(0xc0000d9ec8)
+	/root/chaos-mesh/pkg/proxy/test/routine/routine.go:76 +0x8b7
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.Execute(0xc0001b6780, 0x1, 0x0?)
+	/root/chaos-mesh/pkg/proxy/test/routine/routine.go:112 +0x4c5
+created by github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.(*TestMicroservice).CreateRoutine
+	/root/chaos-mesh/pkg/proxy/test/routine/micro.go:60 +0x165
+<测试执行上下文> 结束
+2024-02-06T08:53:27.434Z	INFO	routine/routine.go:153	测试 catalogue(a-catalogue-1) 请求 /tags 故障 Chaos{ Index: 2, ProxyFault: 18(code-404) }: 开始
+2024-02-06T08:53:27.434Z	INFO	routine/routine.go:213	测试 catalogue(a-catalogue-1) 请求 /tags 故障 Chaos{ Index: 2, ProxyFault: 18(code-404) }: 结束
+2024-02-06T08:53:27.434Z	DEBUG	routine/task_sub.go:14	GenerateSub: 没有已知依赖的初始请求 catalogue
+2024-02-06T08:53:27.435Z	DEBUG	routine/micro.go:75	TestMicroservice.AddExecuteContext catalogue 加入队列 测试执行上下文： executeContext 
+<测试执行上下文> 开始微服务 3(catalogue)
+直接被测微服务故障 MicroserviceChaos{Microservice: 3(catalogue), Chaos: Chaos{ Index: 1, ProxyFault: 4(stress-cpu) }}
+
+
+下游响应组合: 
+
+下游响应组合详情:
+
+
+调用栈:
+goroutine 286 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:24 +0x65
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.(*ExecuteContext).toString(0xc000b2dda0)
+	/root/chaos-mesh/pkg/proxy/test/routine/routine.go:76 +0x8b7
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.(*TestMicroservice).AddExecuteContext(0xc0001b67d0, {0xc0001b67d0, 0xc000574560, 0xc00056e200, 0x0, 0xc000c3a000})
+	/root/chaos-mesh/pkg/proxy/test/routine/micro.go:76 +0x1ff
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.GenerateSub({0xc0001b67d0?, 0xc000574560?, 0xc00056e200?, 0x0?}, 0xc000c3a000)
+	/root/chaos-mesh/pkg/proxy/test/routine/task_sub.go:25 +0x45b
+created by github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.runGenerateSub
+	/root/chaos-mesh/pkg/proxy/test/routine/task_main.go:94 +0x185
+<测试执行上下文> 结束
+2024-02-06T08:53:27.435Z	DEBUG	routine/task_sub.go:27	GenerateSub: 没有已知依赖的初始请求 catalogue 完成
+2024-02-06T08:53:27.435Z	DEBUG	routine/routine.go:111	Execute microservice catalogue 执行 测试执行上下文： executeContext 
+<测试执行上下文> 开始微服务 3(catalogue)
+直接被测微服务故障 MicroserviceChaos{Microservice: 3(catalogue), Chaos: Chaos{ Index: 1, ProxyFault: 4(stress-cpu) }}
+
+
+下游响应组合: 
+
+下游响应组合详情:
+
+
+调用栈:
+goroutine 123 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:24 +0x65
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.(*ExecuteContext).toString(0xc0000d9ec8)
+	/root/chaos-mesh/pkg/proxy/test/routine/routine.go:76 +0x8b7
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.Execute(0xc0001b6780, 0x1, 0x0?)
+	/root/chaos-mesh/pkg/proxy/test/routine/routine.go:112 +0x4c5
+created by github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.(*TestMicroservice).CreateRoutine
+	/root/chaos-mesh/pkg/proxy/test/routine/micro.go:60 +0x165
+<测试执行上下文> 结束
+2024-02-06T08:53:27.435Z	INFO	routine/routine.go:153	测试 catalogue(a-catalogue-1) 请求 /tags 故障 Chaos{ Index: 1, ProxyFault: 4(stress-cpu) }: 开始
+2024-02-06T08:53:27.435Z	DEBUG	routine/routine.go:227	测试 catalogue(a-catalogue-1) 请求 /tags 故障 Chaos{ Index: 1, ProxyFault: 4(stress-cpu) }: 当前故障种类适用于当前被测 Pod
+2024-02-06T08:53:27.435Z	INFO	routine/routine.go:309	测试 catalogue(a-catalogue-1) 请求 /tags 故障 Chaos{ Index: 1, ProxyFault: 4(stress-cpu) } 第 1 次: 开始
+2024-02-06T08:53:27.440Z	DEBUG	routine/manager.go:28	SetResponseBehavior a-catalogue-1
+2024-02-06T08:53:27.441Z	INFO	routine/routine.go:334	测试 catalogue(a-catalogue-1) 请求 /tags 故障 Chaos{ Index: 1, ProxyFault: 4(stress-cpu) } 第 1 次: 初始时无故障
+2024-02-06T08:53:27.441Z	INFO	k8s/k8s.go:243	等待微服务 a-catalogue-1 就绪
+2024-02-06T08:53:27.480Z	INFO	k8s/k8s.go:267	微服务 a-catalogue-1 就绪 历时 39.394401ms
+2024-02-06T08:53:27.485Z	DEBUG	k8s/k8s.go:572	请求 http://a-catalogue-1:80/health
+2024-02-06T08:53:27.492Z	INFO	k8s/k8s.go:585	通过服务名 a-catalogue-1 可以请求微服务 a-catalogue-1
+2024-02-06T08:53:27.527Z	DEBUG	routine/routine.go:420	测试 catalogue(a-catalogue-1) 请求 /tags 故障 Chaos{ Index: 1, ProxyFault: 4(stress-cpu) } 第 1 次: 初始后进入故障
+2024-02-06T08:53:27.527Z	DEBUG	k8s/chaos.go:28	注入 StressChaos 类型故障 d02-06t08-53-27.527736.a-catalogue-1.stresschaos
+2024-02-06T08:53:27.603Z	INFO	k8s/k8s.go:277	等待微服务 a-catalogue-1 进入故障 d02-06t08-53-27.527736.a-catalogue-1.stresschaos
+2024-02-06T08:53:28.134Z	INFO	k8s/k8s.go:283	微服务 a-catalogue-1 进入故障 d02-06t08-53-27.527736.a-catalogue-1.stresschaos 历时 530.969677ms
+2024-02-06T08:53:28.224Z	DEBUG	routine/micro.go:145	doTestRequest a-catalogue-1: 第 1 次 发送请求 http://a-catalogue-1:80/tags
+2024-02-06T08:53:28.247Z	INFO	routine/routine.go:519	测试 catalogue(a-catalogue-1) 请求 /tags 故障 Chaos{ Index: 1, ProxyFault: 4(stress-cpu) } 第 1 次: 响应内容: StatusCode '200' Header 'map[Content-Length:[107] Content-Type:[application/json; charset=utf-8] Date:[Tue, 06 Feb 2024 08:53:28 GMT]]' len(body) = 107 body '{"tags":["brown","geek","formal","blue","skin","red","action","sport","black","magic","green"],"err":null}
+'
+2024-02-06T08:53:28.310Z	DEBUG	routine/routine.go:391	测试 catalogue(a-catalogue-1) 请求 /tags 故障 Chaos{ Index: 1, ProxyFault: 4(stress-cpu) } 第 1 次: 从故障中恢复 DNS故障? false 
+2024-02-06T08:53:28.310Z	DEBUG	routine/routine.go:572	测试 catalogue(a-catalogue-1) 请求 /tags 故障 Chaos{ Index: 1, ProxyFault: 4(stress-cpu) } 第 1 次: 不存在新发现未完成任务 总任务 0 枚举位置 -1
+2024-02-06T08:53:28.310Z	INFO	routine/task_main.go:71	测试 3(catalogue) 请求 /tags: 完成当前请求
+2024-02-06T08:53:28.311Z	DEBUG	routine/micro.go:75	TestMicroservice.AddExecuteContext front-end 加入队列 测试执行上下文： executeContext 
+<测试执行上下文> 开始微服务 5(front-end)
+直接被测微服务故障 MicroserviceChaos{Microservice: 5(front-end), Chaos: Chaos{ Index: -1, ProxyFault: 0(normal) }}
+
+
+下游响应组合: 0/2 
+
+下游响应组合详情:
+[0]: 响应 0	已完成? true	
+响应用时: 234.55711ms 其中服务端用时: 232.999098ms
+状态码: 200
+响应头
+Content-Type[0]:	application/json; charset=utf-8
+Date[0]:	Tue, 06 Feb 2024 08:53:06 GMT
+Content-Length[0]:	107
+响应体 长度 107
+{"tags":["brown","geek","formal","blue","skin","red","action","sport","black","magic","green"],"err":null}
+
+
+
+
+调用栈:
+goroutine 295 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:24 +0x65
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.(*ExecuteContext).toString(0xc0005a1bd0)
+	/root/chaos-mesh/pkg/proxy/test/routine/routine.go:76 +0x8b7
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.(*TestMicroservice).AddExecuteContext(0xc0001b69b0, {0xc0001b69b0, 0xc00028d820, 0xc000aa8ec0, 0x0, 0xc000195500})
+	/root/chaos-mesh/pkg/proxy/test/routine/micro.go:76 +0x1ff
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.(*TestRoutine).runTaskFaultDownstreamRetry.func2()
+	/root/chaos-mesh/pkg/proxy/test/routine/routine.go:566 +0x1488
+created by github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.(*TestRoutine).runTaskFaultDownstreamRetry
+	/root/chaos-mesh/pkg/proxy/test/routine/routine.go:530 +0x22ff
+<测试执行上下文> 结束
+2024-02-06T08:53:28.311Z	DEBUG	routine/routine.go:111	Execute microservice front-end 执行 测试执行上下文： executeContext 
+<测试执行上下文> 开始微服务 5(front-end)
+直接被测微服务故障 MicroserviceChaos{Microservice: 5(front-end), Chaos: Chaos{ Index: -1, ProxyFault: 0(normal) }}
+
+
+下游响应组合: 0/2 
+
+下游响应组合详情:
+[0]: 响应 0	已完成? true	
+响应用时: 234.55711ms 其中服务端用时: 232.999098ms
+状态码: 200
+响应头
+Content-Length[0]:	107
+Content-Type[0]:	application/json; charset=utf-8
+Date[0]:	Tue, 06 Feb 2024 08:53:06 GMT
+响应体 长度 107
+{"tags":["brown","geek","formal","blue","skin","red","action","sport","black","magic","green"],"err":null}
+
+
+
+
+调用栈:
+goroutine 127 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:24 +0x65
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.(*ExecuteContext).toString(0xc0000d3ec8)
+	/root/chaos-mesh/pkg/proxy/test/routine/routine.go:76 +0x8b7
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.Execute(0xc0001b6960, 0x1, 0x0?)
+	/root/chaos-mesh/pkg/proxy/test/routine/routine.go:112 +0x4c5
+created by github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.(*TestMicroservice).CreateRoutine
+	/root/chaos-mesh/pkg/proxy/test/routine/micro.go:60 +0x165
+<测试执行上下文> 结束
+2024-02-06T08:53:28.311Z	INFO	routine/routine.go:153	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) }: 开始
+2024-02-06T08:53:28.311Z	DEBUG	routine/routine.go:227	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) }: 当前故障种类适用于当前被测 Pod
+2024-02-06T08:53:28.311Z	INFO	routine/routine.go:309	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) } 第 1 次: 开始
+2024-02-06T08:53:28.320Z	DEBUG	routine/manager.go:28	SetResponseBehavior a-front-end-1
+2024-02-06T08:53:28.321Z	INFO	routine/routine.go:334	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) } 第 1 次: 初始时无故障
+2024-02-06T08:53:28.321Z	INFO	k8s/k8s.go:243	等待微服务 a-front-end-1 就绪
+2024-02-06T08:53:28.325Z	INFO	k8s/k8s.go:267	微服务 a-front-end-1 就绪 历时 3.878844ms
+2024-02-06T08:53:28.331Z	DEBUG	k8s/k8s.go:572	请求 http://a-front-end-1:80/
+2024-02-06T08:53:28.337Z	INFO	k8s/k8s.go:585	通过服务名 a-front-end-1 可以请求微服务 a-front-end-1
+2024-02-06T08:53:28.592Z	INFO	k8s/k8s.go:296	等待微服务 a-catalogue-1 退出故障 d02-06t08-53-27.527736.a-catalogue-1.stresschaos
+2024-02-06T08:53:28.734Z	DEBUG	k8s/chaos_status.go:22	IsOutChaos k8s.ChaosStatus{Selected:true, AllInjected:true, AllRecovered:false, Paused:true}
+2024-02-06T08:53:28.935Z	DEBUG	k8s/chaos_status.go:22	IsOutChaos k8s.ChaosStatus{Selected:true, AllInjected:false, AllRecovered:true, Paused:true}
+2024-02-06T08:53:28.935Z	DEBUG	k8s/k8s.go:302	微服务 a-catalogue-1 退出故障 d02-06t08-53-27.527736.a-catalogue-1.stresschaos 历时 342.81072ms
+2024-02-06T08:53:28.935Z	DEBUG	routine/manager.go:43	ClearResponseBehavior a-catalogue-1
+2024-02-06T08:53:28.935Z	INFO	routine/routine.go:653	测试 catalogue(a-catalogue-1) 请求 /tags 故障 Chaos{ Index: 1, ProxyFault: 4(stress-cpu) } 第 1 次: 完成
+2024-02-06T08:53:28.935Z	INFO	routine/routine.go:292	测试 catalogue(a-catalogue-1) 请求 /tags 故障 Chaos{ Index: 1, ProxyFault: 4(stress-cpu) }: 结束
+2024-02-06T08:53:29.252Z	DEBUG	monitor/monitor.go:153	等待 container_fs_writes_bytes_total test-front-end a-front-end-1-55c8fc96f8-vz85n  直到 2024-02-06 08:53:48.311 +0000 UTC 1707209608311，睡眠 19.058250332s
+2024-02-06T08:53:48.720Z	DEBUG	monitor/monitor.go:167	获取 cAdvisor 指标 container_fs_writes_bytes_total test-front-end a-front-end-1-55c8fc96f8-vz85n  成功：0.000000 1707209620382
+2024-02-06T08:53:48.720Z	DEBUG	monitor/monitor.go:153	等待 container_fs_reads_bytes_total test-front-end a-front-end-1-55c8fc96f8-vz85n  直到 2024-02-06 08:53:48.311 +0000 UTC 1707209608311，睡眠 -409.672144ms
+2024-02-06T08:53:49.188Z	DEBUG	monitor/monitor.go:167	获取 cAdvisor 指标 container_fs_reads_bytes_total test-front-end a-front-end-1-55c8fc96f8-vz85n  成功：11628544.000000 1707209620382
+2024-02-06T08:53:49.188Z	DEBUG	routine/routine.go:379	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) } 第 1 次: 初始使用情况: container_fs_writes_bytes_total 0.000000 1707209620382 2024-02-06T08:53:40.382Z
+2024-02-06T08:53:49.188Z	DEBUG	routine/routine.go:418	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) } 第 1 次: 无除DNS以外的故障
+2024-02-06T08:53:49.231Z	DEBUG	routine/micro.go:145	doTestRequest a-front-end-1: 第 1 次 发送请求 http://a-front-end-1:80/tags
+2024-02-06T08:53:49.241Z	DEBUG	proxy/proxy.go:115	serverHttp 192.168.215.199:43780 -> catalogue Begin
+2024-02-06T08:53:49.241Z	DEBUG	proxy/proxy.go:78	请求来源微服务 a-front-end-1
+2024-02-06T08:53:49.241Z	DEBUG	proxy/proxy.go:119	serverHttp 192.168.215.199:43780 -> catalogue fromName
+2024-02-06T08:53:49.241Z	DEBUG	proxy/proxy.go:54	请求目标微服务 catalogue 端口 80
+2024-02-06T08:53:49.241Z	DEBUG	proxy/proxy.go:122	serverHttp 192.168.215.199:43780 -> catalogue toMicroservice
+2024-02-06T08:53:49.241Z	INFO	proxy/proxy.go:128	请求 from a-front-end-1 to 3 catalogue fullURI: 'http://catalogue:80/tags'
+2024-02-06T08:53:49.241Z	DEBUG	routine/manager.go:18	GetBehavior a-front-end-1
+2024-02-06T08:53:49.242Z	DEBUG	routine/behavior.go:44	cursor 0 len 1
+2024-02-06T08:53:49.242Z	DEBUG	routine/behavior.go:49	is same request http://catalogue:80/tags 0
+2024-02-06T08:53:49.242Z	INFO	proxy/proxy.go:178	请求 from a-front-end-1 to 3 catalogue fullURI: 'http://catalogue:80/tags': 响应存在
+2024-02-06T08:53:49.242Z	INFO	proxy/proxy.go:165	serverHttp 等待更长时间 1.57129ms > 232.999098ms
+2024-02-06T08:53:49.475Z	DEBUG	proxy/proxy.go:217	serverHttp 192.168.215.199:43780 -> catalogue End
+2024-02-06T08:53:49.487Z	INFO	routine/routine.go:519	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) } 第 1 次: 响应内容: StatusCode '200' Header 'map[Date:[Tue, 06 Feb 2024 08:53:49 GMT] Set-Cookie:[md.sid=s%3A1PnLWNDVUYWFhZQU69BwZ4d7sjBKIICX.5m88rHmW7dnK2lo5UkftPIlbsbNbKD2Rrz21%2FKEvzy0; Path=/; HttpOnly] X-Powered-By:[Express]]' len(body) = 107 body '{"tags":["brown","geek","formal","blue","skin","red","action","sport","black","magic","green"],"err":null}
+'
+2024-02-06T08:53:49.525Z	DEBUG	routine/routine.go:401	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) } 第 1 次: 无需从故障中恢复
+2024-02-06T08:53:49.525Z	DEBUG	routine/routine.go:572	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) } 第 1 次: 不存在新发现未完成任务 总任务 1 枚举位置 -1
+2024-02-06T08:53:49.525Z	DEBUG	routine/manager.go:43	ClearResponseBehavior a-front-end-1
+2024-02-06T08:53:49.525Z	INFO	routine/routine.go:653	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) } 第 1 次: 完成
+2024-02-06T08:53:49.525Z	INFO	routine/routine.go:292	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) }: 结束
+2024-02-06T08:53:49.531Z	DEBUG	monitor/monitor.go:153	等待 container_fs_writes_bytes_total test-front-end a-front-end-1-55c8fc96f8-vz85n  直到 2024-02-06 08:54:09.525 +0000 UTC 1707209629525，睡眠 19.99317351s
+2024-02-06T08:54:10.011Z	DEBUG	monitor/monitor.go:167	获取 cAdvisor 指标 container_fs_writes_bytes_total test-front-end a-front-end-1-55c8fc96f8-vz85n  成功：0.000000 1707209638577
+2024-02-06T08:54:10.011Z	DEBUG	monitor/monitor.go:153	等待 container_fs_reads_bytes_total test-front-end a-front-end-1-55c8fc96f8-vz85n  直到 2024-02-06 08:54:09.525 +0000 UTC 1707209629525，睡眠 -486.352883ms
+2024-02-06T08:54:10.378Z	DEBUG	monitor/monitor.go:167	获取 cAdvisor 指标 container_fs_reads_bytes_total test-front-end a-front-end-1-55c8fc96f8-vz85n  成功：11628544.000000 1707209638577
+2024-02-06T08:54:10.378Z	WARN	routine/routine.go:592	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) } 第 1 次: 未使用的系统资源: container_fs_writes_bytes_total 0.000000 1707209620382-1707209638577 2024-02-06T08:53:40.382Z-2024-02-06T08:53:58.577Z
+2024-02-06T08:54:10.378Z	WARN	routine/routine.go:600	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) } 第 1 次: 未使用的系统资源: container_fs_reads_bytes_total 11628544.000000 1707209620382-1707209638577 2024-02-06T08:53:40.382Z-2024-02-06T08:53:58.577Z
+2024-02-06T08:54:10.378Z	WARN	routine/routine.go:609	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) } 第 1 次: 无需注入 IO 故障
+2024-02-06T08:54:10.378Z	DEBUG	routine/routine.go:621	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) } 第 1 次: 继续枚举当前位 -1 之后的第 0 位
+2024-02-06T08:54:10.378Z	DEBUG	routine/task_sub.go:31	GenerateSub: 已知依赖的初始请求 front-end 枚举第 0/1 位
+2024-02-06T08:54:10.378Z	DEBUG	routine/micro.go:75	TestMicroservice.AddExecuteContext front-end 加入队列 测试执行上下文： executeContext 
+<测试执行上下文> 开始微服务 5(front-end)
+直接被测微服务故障 MicroserviceChaos{Microservice: 5(front-end), Chaos: Chaos{ Index: -1, ProxyFault: 0(normal) }}
+
+
+下游响应组合: 1/2 
+
+下游响应组合详情:
+[0]: 响应 1	已完成? true	
+响应用时: 0s 其中服务端用时: 0s
+状态码: 404
+
+
+
+调用栈:
+goroutine 360 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:24 +0x65
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.(*ExecuteContext).toString(0xc000b2bda0)
+	/root/chaos-mesh/pkg/proxy/test/routine/routine.go:76 +0x8b7
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.(*TestMicroservice).AddExecuteContext(0xc0001b69b0, {0xc0001b69b0, 0xc00028d820, 0xc0007d2600, 0xc0008100c0, 0xc0003e8060})
+	/root/chaos-mesh/pkg/proxy/test/routine/micro.go:76 +0x1ff
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.GenerateSub({0xc0001b69b0?, 0xc00028d820?, 0xc0007d25c0?, 0xc0008100c0?}, 0xc0003e8000)
+	/root/chaos-mesh/pkg/proxy/test/routine/task_sub.go:57 +0x66d
+created by github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.(*TestRoutine).runTaskFaultDownstreamRetry.func2
+	/root/chaos-mesh/pkg/proxy/test/routine/routine.go:642 +0x1214
+<测试执行上下文> 结束
+2024-02-06T08:54:10.379Z	DEBUG	routine/routine.go:111	Execute microservice front-end 执行 测试执行上下文： executeContext 
+<测试执行上下文> 开始微服务 5(front-end)
+直接被测微服务故障 MicroserviceChaos{Microservice: 5(front-end), Chaos: Chaos{ Index: -1, ProxyFault: 0(normal) }}
+
+
+下游响应组合: 1/2 
+
+下游响应组合详情:
+[0]: 响应 1	已完成? true	
+响应用时: 0s 其中服务端用时: 0s
+状态码: 404
+
+
+
+调用栈:
+goroutine 127 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:24 +0x65
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.(*ExecuteContext).toString(0xc000713ec8)
+	/root/chaos-mesh/pkg/proxy/test/routine/routine.go:76 +0x8b7
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.Execute(0xc0001b6960, 0x1, 0x0?)
+	/root/chaos-mesh/pkg/proxy/test/routine/routine.go:112 +0x4c5
+created by github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.(*TestMicroservice).CreateRoutine
+	/root/chaos-mesh/pkg/proxy/test/routine/micro.go:60 +0x165
+<测试执行上下文> 结束
+2024-02-06T08:54:10.379Z	INFO	routine/routine.go:153	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) }: 开始
+2024-02-06T08:54:10.379Z	DEBUG	routine/routine.go:227	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) }: 当前故障种类适用于当前被测 Pod
+2024-02-06T08:54:10.379Z	INFO	routine/routine.go:309	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) } 第 1 次: 开始
+2024-02-06T08:54:10.389Z	DEBUG	routine/manager.go:28	SetResponseBehavior a-front-end-1
+2024-02-06T08:54:10.389Z	INFO	routine/routine.go:334	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) } 第 1 次: 初始时无故障
+2024-02-06T08:54:10.389Z	INFO	k8s/k8s.go:243	等待微服务 a-front-end-1 就绪
+2024-02-06T08:54:10.395Z	INFO	k8s/k8s.go:267	微服务 a-front-end-1 就绪 历时 6.406608ms
+2024-02-06T08:54:10.400Z	DEBUG	k8s/k8s.go:572	请求 http://a-front-end-1:80/
+2024-02-06T08:54:10.406Z	INFO	k8s/k8s.go:585	通过服务名 a-front-end-1 可以请求微服务 a-front-end-1
+2024-02-06T08:54:10.478Z	DEBUG	routine/routine.go:418	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) } 第 1 次: 无除DNS以外的故障
+2024-02-06T08:54:10.527Z	DEBUG	routine/micro.go:145	doTestRequest a-front-end-1: 第 1 次 发送请求 http://a-front-end-1:80/tags
+2024-02-06T08:54:10.534Z	DEBUG	proxy/proxy.go:115	serverHttp 192.168.215.199:43782 -> catalogue Begin
+2024-02-06T08:54:10.534Z	DEBUG	proxy/proxy.go:78	请求来源微服务 a-front-end-1
+2024-02-06T08:54:10.534Z	DEBUG	proxy/proxy.go:119	serverHttp 192.168.215.199:43782 -> catalogue fromName
+2024-02-06T08:54:10.534Z	DEBUG	proxy/proxy.go:54	请求目标微服务 catalogue 端口 80
+2024-02-06T08:54:10.534Z	DEBUG	proxy/proxy.go:122	serverHttp 192.168.215.199:43782 -> catalogue toMicroservice
+2024-02-06T08:54:10.534Z	INFO	proxy/proxy.go:128	请求 from a-front-end-1 to 3 catalogue fullURI: 'http://catalogue:80/tags'
+2024-02-06T08:54:10.534Z	DEBUG	routine/manager.go:18	GetBehavior a-front-end-1
+2024-02-06T08:54:10.535Z	DEBUG	routine/behavior.go:44	cursor 0 len 1
+2024-02-06T08:54:10.535Z	DEBUG	routine/behavior.go:49	is same request http://catalogue:80/tags 0
+2024-02-06T08:54:10.535Z	INFO	proxy/proxy.go:178	请求 from a-front-end-1 to 3 catalogue fullURI: 'http://catalogue:80/tags': 响应存在
+2024-02-06T08:54:10.535Z	DEBUG	proxy/proxy.go:217	serverHttp 192.168.215.199:43782 -> catalogue End
+2024-02-06T08:54:10.539Z	INFO	routine/routine.go:519	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) } 第 1 次: 响应内容: StatusCode '200' Header 'map[Date:[Tue, 06 Feb 2024 08:54:10 GMT] Set-Cookie:[md.sid=s%3AiAtUamUhd82z4gZoeO1rDmWsVnufwKjB.yzxngqRYiApLn7Q%2FP4GUCDGlcuOfozMevnJCnfkjVqA; Path=/; HttpOnly] X-Powered-By:[Express]]' len(body) = 0 body ''
+2024-02-06T08:54:11.117Z	DEBUG	routine/routine.go:401	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) } 第 1 次: 无需从故障中恢复
+2024-02-06T08:54:11.117Z	DEBUG	routine/manager.go:43	ClearResponseBehavior a-front-end-1
+2024-02-06T08:54:11.117Z	INFO	routine/routine.go:653	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) } 第 1 次: 完成
+2024-02-06T08:54:11.117Z	INFO	routine/routine.go:292	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) }: 结束
+2024-02-06T08:54:11.117Z	DEBUG	routine/routine.go:572	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: -1, ProxyFault: 0(normal) } 第 1 次: 不存在新发现未完成任务 总任务 1 枚举位置 0
+2024-02-06T08:54:11.117Z	DEBUG	routine/task_sub.go:65	GenerateSub: 已知依赖的初始请求 front-end 枚举第 0/1 位 完成
+2024-02-06T08:54:11.117Z	INFO	routine/task_main.go:54	测试 5(front-end) 请求 /tags: 跳过故障 0 normal
+2024-02-06T08:54:11.117Z	DEBUG	routine/task_sub.go:14	GenerateSub: 没有已知依赖的初始请求 front-end
+2024-02-06T08:54:11.117Z	DEBUG	routine/task_sub.go:14	GenerateSub: 没有已知依赖的初始请求 front-end
+2024-02-06T08:54:11.117Z	DEBUG	routine/micro.go:75	TestMicroservice.AddExecuteContext front-end 加入队列 测试执行上下文： executeContext 
+<测试执行上下文> 开始微服务 5(front-end)
+直接被测微服务故障 MicroserviceChaos{Microservice: 5(front-end), Chaos: Chaos{ Index: 2, ProxyFault: 18(code-404) }}
+
+
+下游响应组合: 
+
+下游响应组合详情:
+
+
+调用栈:
+goroutine 454 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:24 +0x65
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.(*ExecuteContext).toString(0xc000711da0)
+	/root/chaos-mesh/pkg/proxy/test/routine/routine.go:76 +0x8b7
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.(*TestMicroservice).AddExecuteContext(0xc0001b69b0, {0xc0001b69b0, 0xc00028d820, 0xc00056e300, 0x0, 0xc0003afaa0})
+	/root/chaos-mesh/pkg/proxy/test/routine/micro.go:76 +0x1ff
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.GenerateSub({0xc0001b69b0?, 0xc00028d820?, 0xc00056e300?, 0x0?}, 0xc0003afaa0)
+	/root/chaos-mesh/pkg/proxy/test/routine/task_sub.go:25 +0x45b
+created by github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.runGenerateSub
+	/root/chaos-mesh/pkg/proxy/test/routine/task_main.go:94 +0x185
+<测试执行上下文> 结束
+2024-02-06T08:54:11.117Z	DEBUG	routine/task_sub.go:27	GenerateSub: 没有已知依赖的初始请求 front-end 完成
+2024-02-06T08:54:11.117Z	DEBUG	routine/micro.go:75	TestMicroservice.AddExecuteContext front-end 加入队列 测试执行上下文： executeContext 
+<测试执行上下文> 开始微服务 5(front-end)
+直接被测微服务故障 MicroserviceChaos{Microservice: 5(front-end), Chaos: Chaos{ Index: 1, ProxyFault: 4(stress-cpu) }}
+
+
+下游响应组合: 
+
+下游响应组合详情:
+
+
+调用栈:
+goroutine 453 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:24 +0x65
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.(*ExecuteContext).toString(0xc000711da0)
+	/root/chaos-mesh/pkg/proxy/test/routine/routine.go:76 +0x8b7
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.(*TestMicroservice).AddExecuteContext(0xc0001b69b0, {0xc0001b69b0, 0xc00028d820, 0xc00056e240, 0x0, 0xc0003afa40})
+	/root/chaos-mesh/pkg/proxy/test/routine/micro.go:76 +0x1ff
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.GenerateSub({0xc0001b69b0?, 0xc00028d820?, 0xc00056e240?, 0x0?}, 0xc0003afa40)
+	/root/chaos-mesh/pkg/proxy/test/routine/task_sub.go:25 +0x45b
+created by github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.runGenerateSub
+	/root/chaos-mesh/pkg/proxy/test/routine/task_main.go:94 +0x185
+<测试执行上下文> 结束
+2024-02-06T08:54:11.117Z	DEBUG	routine/task_sub.go:27	GenerateSub: 没有已知依赖的初始请求 front-end 完成
+2024-02-06T08:54:11.117Z	DEBUG	routine/routine.go:111	Execute microservice front-end 执行 测试执行上下文： executeContext 
+<测试执行上下文> 开始微服务 5(front-end)
+直接被测微服务故障 MicroserviceChaos{Microservice: 5(front-end), Chaos: Chaos{ Index: 2, ProxyFault: 18(code-404) }}
+
+
+下游响应组合: 
+
+下游响应组合详情:
+
+
+调用栈:
+goroutine 127 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:24 +0x65
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.(*ExecuteContext).toString(0xc00072dec8)
+	/root/chaos-mesh/pkg/proxy/test/routine/routine.go:76 +0x8b7
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.Execute(0xc0001b6960, 0x1, 0x0?)
+	/root/chaos-mesh/pkg/proxy/test/routine/routine.go:112 +0x4c5
+created by github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.(*TestMicroservice).CreateRoutine
+	/root/chaos-mesh/pkg/proxy/test/routine/micro.go:60 +0x165
+<测试执行上下文> 结束
+2024-02-06T08:54:11.118Z	INFO	routine/routine.go:153	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: 2, ProxyFault: 18(code-404) }: 开始
+2024-02-06T08:54:11.118Z	INFO	routine/routine.go:213	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: 2, ProxyFault: 18(code-404) }: 结束
+2024-02-06T08:54:11.118Z	DEBUG	routine/routine.go:111	Execute microservice front-end 执行 测试执行上下文： executeContext 
+<测试执行上下文> 开始微服务 5(front-end)
+直接被测微服务故障 MicroserviceChaos{Microservice: 5(front-end), Chaos: Chaos{ Index: 1, ProxyFault: 4(stress-cpu) }}
+
+
+下游响应组合: 
+
+下游响应组合详情:
+
+
+调用栈:
+goroutine 127 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:24 +0x65
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.(*ExecuteContext).toString(0xc00072dec8)
+	/root/chaos-mesh/pkg/proxy/test/routine/routine.go:76 +0x8b7
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.Execute(0xc0001b6960, 0x1, 0x0?)
+	/root/chaos-mesh/pkg/proxy/test/routine/routine.go:112 +0x4c5
+created by github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.(*TestMicroservice).CreateRoutine
+	/root/chaos-mesh/pkg/proxy/test/routine/micro.go:60 +0x165
+<测试执行上下文> 结束
+2024-02-06T08:54:11.118Z	INFO	routine/routine.go:153	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: 1, ProxyFault: 4(stress-cpu) }: 开始
+2024-02-06T08:54:11.118Z	DEBUG	routine/routine.go:227	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: 1, ProxyFault: 4(stress-cpu) }: 当前故障种类适用于当前被测 Pod
+2024-02-06T08:54:11.119Z	INFO	routine/routine.go:309	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: 1, ProxyFault: 4(stress-cpu) } 第 1 次: 开始
+2024-02-06T08:54:11.190Z	DEBUG	routine/manager.go:28	SetResponseBehavior a-front-end-1
+2024-02-06T08:54:11.190Z	INFO	routine/routine.go:334	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: 1, ProxyFault: 4(stress-cpu) } 第 1 次: 初始时无故障
+2024-02-06T08:54:11.190Z	INFO	k8s/k8s.go:243	等待微服务 a-front-end-1 就绪
+2024-02-06T08:54:11.195Z	INFO	k8s/k8s.go:267	微服务 a-front-end-1 就绪 历时 4.757638ms
+2024-02-06T08:54:11.202Z	DEBUG	k8s/k8s.go:572	请求 http://a-front-end-1:80/
+2024-02-06T08:54:11.215Z	INFO	k8s/k8s.go:585	通过服务名 a-front-end-1 可以请求微服务 a-front-end-1
+2024-02-06T08:54:11.997Z	DEBUG	routine/routine.go:420	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: 1, ProxyFault: 4(stress-cpu) } 第 1 次: 初始后进入故障
+2024-02-06T08:54:11.997Z	DEBUG	k8s/chaos.go:28	注入 StressChaos 类型故障 d02-06t08-54-11.997424.a-front-end-1.stresschaos
+2024-02-06T08:54:12.025Z	INFO	k8s/k8s.go:277	等待微服务 a-front-end-1 进入故障 d02-06t08-54-11.997424.a-front-end-1.stresschaos
+2024-02-06T08:54:12.404Z	INFO	k8s/k8s.go:283	微服务 a-front-end-1 进入故障 d02-06t08-54-11.997424.a-front-end-1.stresschaos 历时 378.522808ms
+2024-02-06T08:54:12.797Z	DEBUG	routine/micro.go:145	doTestRequest a-front-end-1: 第 1 次 发送请求 http://a-front-end-1:80/tags
+2024-02-06T08:54:12.963Z	DEBUG	proxy/proxy.go:115	serverHttp 192.168.215.199:43786 -> catalogue Begin
+2024-02-06T08:54:12.964Z	DEBUG	proxy/proxy.go:78	请求来源微服务 a-front-end-1
+2024-02-06T08:54:12.964Z	DEBUG	proxy/proxy.go:119	serverHttp 192.168.215.199:43786 -> catalogue fromName
+2024-02-06T08:54:12.971Z	DEBUG	proxy/proxy.go:54	请求目标微服务 catalogue 端口 80
+2024-02-06T08:54:12.971Z	DEBUG	proxy/proxy.go:122	serverHttp 192.168.215.199:43786 -> catalogue toMicroservice
+2024-02-06T08:54:12.971Z	INFO	proxy/proxy.go:128	请求 from a-front-end-1 to 3 catalogue fullURI: 'http://catalogue:80/tags'
+2024-02-06T08:54:12.971Z	DEBUG	routine/manager.go:18	GetBehavior a-front-end-1
+2024-02-06T08:54:12.972Z	DEBUG	routine/behavior.go:44	cursor 0 len 0
+2024-02-06T08:54:12.972Z	WARN	routine/behavior.go:70	创建任务时，任务已存在 http://catalogue:80/tags
+2024-02-06T08:54:12.972Z	WARN	routine/behavior.go:80	创建任务时，任务已完成 http://catalogue:80/tags
+2024-02-06T08:54:12.972Z	INFO	proxy/proxy.go:178	请求 from a-front-end-1 to 3 catalogue fullURI: 'http://catalogue:80/tags': 响应存在
+2024-02-06T08:54:12.972Z	INFO	proxy/proxy.go:165	serverHttp 等待更长时间 8.980351ms > 232.999098ms
+2024-02-06T08:54:13.197Z	DEBUG	proxy/proxy.go:217	serverHttp 192.168.215.199:43786 -> catalogue End
+2024-02-06T08:54:13.253Z	INFO	routine/routine.go:519	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: 1, ProxyFault: 4(stress-cpu) } 第 1 次: 响应内容: StatusCode '200' Header 'map[Date:[Tue, 06 Feb 2024 08:54:13 GMT] Set-Cookie:[md.sid=s%3Aq1HJ3ohK9r7AldbEgCbINF3gmbF4jyIl.2gTX06qRVxuC2cUJkEprOGWEBFAaIqFEEIgKFHQtGvw; Path=/; HttpOnly] X-Powered-By:[Express]]' len(body) = 107 body '{"tags":["brown","geek","formal","blue","skin","red","action","sport","black","magic","green"],"err":null}
+'
+2024-02-06T08:54:13.595Z	DEBUG	routine/routine.go:391	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: 1, ProxyFault: 4(stress-cpu) } 第 1 次: 从故障中恢复 DNS故障? false 
+2024-02-06T08:54:13.595Z	DEBUG	routine/routine.go:572	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: 1, ProxyFault: 4(stress-cpu) } 第 1 次: 不存在新发现未完成任务 总任务 1 枚举位置 -1
+2024-02-06T08:54:13.595Z	DEBUG	routine/routine.go:621	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: 1, ProxyFault: 4(stress-cpu) } 第 1 次: 继续枚举当前位 -1 之后的第 0 位
+2024-02-06T08:54:13.595Z	DEBUG	routine/task_sub.go:31	GenerateSub: 已知依赖的初始请求 front-end 枚举第 0/1 位
+2024-02-06T08:54:13.595Z	DEBUG	routine/micro.go:75	TestMicroservice.AddExecuteContext front-end 加入队列 测试执行上下文： executeContext 
+<测试执行上下文> 开始微服务 5(front-end)
+直接被测微服务故障 MicroserviceChaos{Microservice: 5(front-end), Chaos: Chaos{ Index: 1, ProxyFault: 4(stress-cpu) }}
+
+
+下游响应组合: 1/2 
+
+下游响应组合详情:
+[0]: 响应 1	已完成? true	
+响应用时: 0s 其中服务端用时: 0s
+状态码: 404
+
+
+
+调用栈:
+goroutine 490 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:24 +0x65
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.(*ExecuteContext).toString(0xc000b2bda0)
+	/root/chaos-mesh/pkg/proxy/test/routine/routine.go:76 +0x8b7
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.(*TestMicroservice).AddExecuteContext(0xc0001b69b0, {0xc0001b69b0, 0xc00028d820, 0xc00056fd00, 0xc0005a69f0, 0xc000a20360})
+	/root/chaos-mesh/pkg/proxy/test/routine/micro.go:76 +0x1ff
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.GenerateSub({0xc0001b69b0?, 0xc00028d820?, 0xc00056fcc0?, 0xc0005a69f0?}, 0xc000a20300)
+	/root/chaos-mesh/pkg/proxy/test/routine/task_sub.go:57 +0x66d
+created by github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.(*TestRoutine).runTaskFaultDownstreamRetry.func2
+	/root/chaos-mesh/pkg/proxy/test/routine/routine.go:642 +0x1214
+<测试执行上下文> 结束
+2024-02-06T08:54:13.618Z	INFO	k8s/k8s.go:296	等待微服务 a-front-end-1 退出故障 d02-06t08-54-11.997424.a-front-end-1.stresschaos
+2024-02-06T08:54:13.625Z	DEBUG	k8s/chaos_status.go:22	IsOutChaos k8s.ChaosStatus{Selected:true, AllInjected:true, AllRecovered:false, Paused:false}
+2024-02-06T08:54:13.631Z	DEBUG	k8s/chaos_status.go:22	IsOutChaos k8s.ChaosStatus{Selected:true, AllInjected:true, AllRecovered:false, Paused:false}
+2024-02-06T08:54:13.635Z	DEBUG	k8s/chaos_status.go:22	IsOutChaos k8s.ChaosStatus{Selected:true, AllInjected:true, AllRecovered:false, Paused:false}
+2024-02-06T08:54:13.641Z	DEBUG	k8s/chaos_status.go:22	IsOutChaos k8s.ChaosStatus{Selected:true, AllInjected:true, AllRecovered:false, Paused:false}
+2024-02-06T08:54:13.804Z	DEBUG	k8s/chaos_status.go:22	IsOutChaos k8s.ChaosStatus{Selected:true, AllInjected:true, AllRecovered:false, Paused:true}
+2024-02-06T08:54:14.005Z	DEBUG	k8s/chaos_status.go:22	IsOutChaos k8s.ChaosStatus{Selected:true, AllInjected:false, AllRecovered:true, Paused:true}
+2024-02-06T08:54:14.005Z	DEBUG	k8s/k8s.go:302	微服务 a-front-end-1 退出故障 d02-06t08-54-11.997424.a-front-end-1.stresschaos 历时 386.453434ms
+2024-02-06T08:54:14.005Z	DEBUG	routine/manager.go:43	ClearResponseBehavior a-front-end-1
+2024-02-06T08:54:14.005Z	INFO	routine/routine.go:653	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: 1, ProxyFault: 4(stress-cpu) } 第 1 次: 完成
+2024-02-06T08:54:14.005Z	INFO	routine/routine.go:292	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: 1, ProxyFault: 4(stress-cpu) }: 结束
+2024-02-06T08:54:14.005Z	DEBUG	routine/routine.go:111	Execute microservice front-end 执行 测试执行上下文： executeContext 
+<测试执行上下文> 开始微服务 5(front-end)
+直接被测微服务故障 MicroserviceChaos{Microservice: 5(front-end), Chaos: Chaos{ Index: 1, ProxyFault: 4(stress-cpu) }}
+
+
+下游响应组合: 1/2 
+
+下游响应组合详情:
+[0]: 响应 1	已完成? true	
+响应用时: 0s 其中服务端用时: 0s
+状态码: 404
+
+
+
+调用栈:
+goroutine 127 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:24 +0x65
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.(*ExecuteContext).toString(0xc00072dec8)
+	/root/chaos-mesh/pkg/proxy/test/routine/routine.go:76 +0x8b7
+github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.Execute(0xc0001b6960, 0x1, 0x0?)
+	/root/chaos-mesh/pkg/proxy/test/routine/routine.go:112 +0x4c5
+created by github.com/chaos-mesh/chaos-mesh/pkg/proxy/test/routine.(*TestMicroservice).CreateRoutine
+	/root/chaos-mesh/pkg/proxy/test/routine/micro.go:60 +0x165
+<测试执行上下文> 结束
+2024-02-06T08:54:14.005Z	INFO	routine/routine.go:153	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: 1, ProxyFault: 4(stress-cpu) }: 开始
+2024-02-06T08:54:14.005Z	DEBUG	routine/routine.go:227	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: 1, ProxyFault: 4(stress-cpu) }: 当前故障种类适用于当前被测 Pod
+2024-02-06T08:54:14.005Z	INFO	routine/routine.go:309	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: 1, ProxyFault: 4(stress-cpu) } 第 1 次: 开始
+2024-02-06T08:54:14.015Z	DEBUG	routine/manager.go:28	SetResponseBehavior a-front-end-1
+2024-02-06T08:54:14.016Z	INFO	routine/routine.go:334	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: 1, ProxyFault: 4(stress-cpu) } 第 1 次: 初始时无故障
+2024-02-06T08:54:14.016Z	INFO	k8s/k8s.go:243	等待微服务 a-front-end-1 就绪
+2024-02-06T08:54:14.022Z	INFO	k8s/k8s.go:267	微服务 a-front-end-1 就绪 历时 5.022976ms
+2024-02-06T08:54:14.026Z	DEBUG	k8s/k8s.go:572	请求 http://a-front-end-1:80/
+2024-02-06T08:54:14.030Z	INFO	k8s/k8s.go:585	通过服务名 a-front-end-1 可以请求微服务 a-front-end-1
+2024-02-06T08:54:14.619Z	DEBUG	routine/routine.go:420	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: 1, ProxyFault: 4(stress-cpu) } 第 1 次: 初始后进入故障
+2024-02-06T08:54:14.619Z	DEBUG	k8s/chaos.go:28	注入 StressChaos 类型故障 d02-06t08-54-14.619968.a-front-end-1.stresschaos
+2024-02-06T08:54:14.660Z	INFO	k8s/k8s.go:277	等待微服务 a-front-end-1 进入故障 d02-06t08-54-14.619968.a-front-end-1.stresschaos
+2024-02-06T08:54:15.004Z	INFO	k8s/k8s.go:283	微服务 a-front-end-1 进入故障 d02-06t08-54-14.619968.a-front-end-1.stresschaos 历时 339.695071ms
+2024-02-06T08:54:15.300Z	INFO	k8s/k8s.go:93	Deploy a-user-db-1 就绪
+2024-02-06T08:54:15.389Z	DEBUG	routine/micro.go:145	doTestRequest a-front-end-1: 第 1 次 发送请求 http://a-front-end-1:80/tags
+2024-02-06T08:54:15.456Z	DEBUG	proxy/proxy.go:115	serverHttp 192.168.215.199:43788 -> catalogue Begin
+2024-02-06T08:54:15.456Z	DEBUG	proxy/proxy.go:78	请求来源微服务 a-front-end-1
+2024-02-06T08:54:15.456Z	DEBUG	proxy/proxy.go:119	serverHttp 192.168.215.199:43788 -> catalogue fromName
+2024-02-06T08:54:15.456Z	DEBUG	proxy/proxy.go:54	请求目标微服务 catalogue 端口 80
+2024-02-06T08:54:15.456Z	DEBUG	proxy/proxy.go:122	serverHttp 192.168.215.199:43788 -> catalogue toMicroservice
+2024-02-06T08:54:15.456Z	INFO	proxy/proxy.go:128	请求 from a-front-end-1 to 3 catalogue fullURI: 'http://catalogue:80/tags'
+2024-02-06T08:54:15.456Z	DEBUG	routine/manager.go:18	GetBehavior a-front-end-1
+2024-02-06T08:54:15.456Z	DEBUG	routine/behavior.go:44	cursor 0 len 1
+2024-02-06T08:54:15.456Z	DEBUG	routine/behavior.go:49	is same request http://catalogue:80/tags 0
+2024-02-06T08:54:15.456Z	INFO	proxy/proxy.go:178	请求 from a-front-end-1 to 3 catalogue fullURI: 'http://catalogue:80/tags': 响应存在
+2024-02-06T08:54:15.456Z	DEBUG	proxy/proxy.go:217	serverHttp 192.168.215.199:43788 -> catalogue End
+2024-02-06T08:54:15.577Z	INFO	routine/routine.go:519	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: 1, ProxyFault: 4(stress-cpu) } 第 1 次: 响应内容: StatusCode '200' Header 'map[Date:[Tue, 06 Feb 2024 08:54:15 GMT] Set-Cookie:[md.sid=s%3AtTn41LzA7NAs8Pu27hsZ0uKJjgmXLwEU.GTpHtsJJkgW3pVwcHttQvTU7qNXHMbz77AGvzdJrH2c; Path=/; HttpOnly] X-Powered-By:[Express]]' len(body) = 0 body ''
+2024-02-06T08:54:15.605Z	INFO	k8s/k8s.go:106	等待 Service a-user-db-1 就绪
+2024-02-06T08:54:15.985Z	INFO	k8s/k8s.go:118	Service a-user-db-1 就绪
+2024-02-06T08:54:15.986Z	DEBUG	routine/routine.go:107	Execute microservice user-db 执行 测试协程 1 初始化完成 routine.TestRoutine{RoutineID:1, AliasName:"a-user-db-1", AliasPodLabels:map[string]string{"app":"a-user-db-1"}, AliasDeploy:(*v1.Deployment)(0xc000296f00), AliasService:(*v1.Service)(0xc000981180)}
+2024-02-06T08:54:16.595Z	DEBUG	routine/routine.go:391	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: 1, ProxyFault: 4(stress-cpu) } 第 1 次: 从故障中恢复 DNS故障? false 
+2024-02-06T08:54:16.596Z	DEBUG	routine/routine.go:572	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: 1, ProxyFault: 4(stress-cpu) } 第 1 次: 不存在新发现未完成任务 总任务 1 枚举位置 0
+2024-02-06T08:54:16.596Z	DEBUG	routine/task_sub.go:65	GenerateSub: 已知依赖的初始请求 front-end 枚举第 0/1 位 完成
+2024-02-06T08:54:16.596Z	INFO	routine/task_main.go:71	测试 5(front-end) 请求 /tags: 完成当前请求
+2024-02-06T08:54:16.596Z	INFO	admin/controllers.go:150	结束时间: 2024-02-06T08:54:16.596420524Z
+2024-02-06T08:54:16.622Z	INFO	k8s/k8s.go:296	等待微服务 a-front-end-1 退出故障 d02-06t08-54-14.619968.a-front-end-1.stresschaos
+2024-02-06T08:54:16.629Z	DEBUG	k8s/chaos_status.go:22	IsOutChaos k8s.ChaosStatus{Selected:true, AllInjected:true, AllRecovered:false, Paused:false}
+2024-02-06T08:54:16.633Z	DEBUG	k8s/chaos_status.go:22	IsOutChaos k8s.ChaosStatus{Selected:true, AllInjected:true, AllRecovered:false, Paused:false}
+2024-02-06T08:54:16.638Z	DEBUG	k8s/chaos_status.go:22	IsOutChaos k8s.ChaosStatus{Selected:true, AllInjected:true, AllRecovered:false, Paused:false}
+2024-02-06T08:54:16.668Z	DEBUG	k8s/chaos_status.go:22	IsOutChaos k8s.ChaosStatus{Selected:true, AllInjected:true, AllRecovered:false, Paused:false}
+2024-02-06T08:54:16.696Z	DEBUG	k8s/chaos_status.go:22	IsOutChaos k8s.ChaosStatus{Selected:true, AllInjected:true, AllRecovered:false, Paused:false}
+2024-02-06T08:54:16.703Z	DEBUG	k8s/chaos_status.go:22	IsOutChaos k8s.ChaosStatus{Selected:true, AllInjected:true, AllRecovered:false, Paused:false}
+2024-02-06T08:54:16.805Z	DEBUG	k8s/chaos_status.go:22	IsOutChaos k8s.ChaosStatus{Selected:true, AllInjected:true, AllRecovered:false, Paused:true}
+2024-02-06T08:54:17.003Z	DEBUG	k8s/chaos_status.go:22	IsOutChaos k8s.ChaosStatus{Selected:true, AllInjected:false, AllRecovered:true, Paused:true}
+2024-02-06T08:54:17.004Z	DEBUG	k8s/k8s.go:302	微服务 a-front-end-1 退出故障 d02-06t08-54-14.619968.a-front-end-1.stresschaos 历时 381.141043ms
+2024-02-06T08:54:17.004Z	DEBUG	routine/manager.go:43	ClearResponseBehavior a-front-end-1
+2024-02-06T08:54:17.004Z	INFO	routine/routine.go:653	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: 1, ProxyFault: 4(stress-cpu) } 第 1 次: 完成
+2024-02-06T08:54:17.004Z	INFO	routine/routine.go:292	测试 front-end(a-front-end-1) 请求 /tags 故障 Chaos{ Index: 1, ProxyFault: 4(stress-cpu) }: 结束
+2024-02-06T08:54:43.720Z	INFO	k8s/k8s.go:93	Deploy a-orders-1 就绪
+2024-02-06T08:54:43.742Z	INFO	k8s/k8s.go:106	等待 Service a-orders-1 就绪
+2024-02-06T08:54:43.789Z	INFO	k8s/k8s.go:118	Service a-orders-1 就绪
+2024-02-06T08:54:43.790Z	DEBUG	routine/routine.go:107	Execute microservice orders 执行 测试协程 1 初始化完成 routine.TestRoutine{RoutineID:1, AliasName:"a-orders-1", AliasPodLabels:map[string]string{"app":"a-orders-1"}, AliasDeploy:(*v1.Deployment)(0xc0005e2000), AliasService:(*v1.Service)(0xc000c9a500)}
+2024-02-06T08:57:08.606Z	INFO	k8s/k8s.go:93	Deploy a-carts-1 就绪
+2024-02-06T08:57:08.629Z	INFO	k8s/k8s.go:106	等待 Service a-carts-1 就绪
+2024-02-06T08:57:08.637Z	INFO	k8s/k8s.go:118	Service a-carts-1 就绪
+2024-02-06T08:57:08.638Z	DEBUG	routine/routine.go:107	Execute microservice carts 执行 测试协程 1 初始化完成 routine.TestRoutine{RoutineID:1, AliasName:"a-carts-1", AliasPodLabels:map[string]string{"app":"a-carts-1"}, AliasDeploy:(*v1.Deployment)(0xc000498f00), AliasService:(*v1.Service)(0xc000926780)}

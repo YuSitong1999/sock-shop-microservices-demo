@@ -132,3 +132,7 @@ docker-compose -f .\deploy\docker-compose\docker-compose-debug.yml up -d
 docker-compose -f .\deploy\docker-compose\docker-compose-debug.yml down
 
 ```
+
+## 测试结果文件
+
+测试结果（主要是日志）文件和描述 [docs/README.md](dev-doc/README.md)

@@ -1,0 +1,7 @@
+NAME                                        READY   STATUS    RESTARTS   AGE     IP                NODE                           NOMINATED NODE   READINESS GATES
+chaos-controller-manager-6c4f984576-6mhnz   1/1     Running   0          9m31s   192.168.215.213   vmi1640551.contaboserver.net   <none>           <none>
+chaos-daemon-xxb6n                          2/2     Running   0          9m31s   192.168.215.212   vmi1640551.contaboserver.net   <none>           <none>
+chaos-dashboard-7fcd9567d5-l6blw            1/1     Running   0          9m31s   192.168.215.230   vmi1640551.contaboserver.net   <none>           <none>
+chaos-dns-server-6855bcd6cb-kg7c8           1/1     Running   0          9m31s   192.168.215.252   vmi1640551.contaboserver.net   <none>           <none>
+load-test-564d977bd5-5r97l                  1/1     Running   0          9m31s   192.168.215.201   vmi1640551.contaboserver.net   <none>           <none>
+mongodb-78d674d66d-pcsgj                    1/1     Running   0          9m45s   192.168.215.233   vmi1640551.contaboserver.net   <none>           <none>
